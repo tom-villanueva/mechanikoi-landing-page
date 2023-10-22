@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import mechaniGirl from '../assets/mechanigirl.png'
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section
+  id="about"
+  class="ml-auto mr-auto mt-44 pt-2 flex scroll-mt-32 flex-col items-center justify-center text-center md:mx-20 md:px-20"
+>
+  <div class="mb-16 flex w-full flex-col items-center justify-evenly md:mb-12 lg:flex-row">
+    <h2 class="px-2 text-4xl text-primary lg:text-6xl">
+      {t("about.title")}
+    </h2>
+    <Image
+      src={mechaniGirl}
+      alt="mechanigirl image about us section"
+      class="mt-4 h-auto lg:mt-0"
+      width={200}
+      height={200}
+    />
+  </div>
+  <div class="mt-4 grid grid-cols-1 gap-y-0 px-4 md:grid-cols-2 lg:gap-y-4">
+    <h3 class="mt-4 border-l-2 border-primary pl-2 text-start text-2xl font-bold uppercase text-primary md:border-b-2">
+      {t("about.firstTitle")}
+    </h3>
+    <p class="w-full border-b-2 border-l-2 border-primary pb-4 pl-2 text-start text-lg text-secondary md:border-l-0 lg:mt-2">
+      {t("about.firstParagraph")}
+    </p>
+    <h3 class="border-l-2 border-primary pl-2 text-start text-2xl font-bold uppercase text-primary md:border-b-2">
+      {t("about.secondTitle")}
+    </h3>
+    <p class="w-full border-b-2 border-l-2 border-primary pb-4 pl-2 text-start text-lg text-secondary md:border-l-0 lg:mt-2">
+      {t("about.secondParagraph")}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+import mechanikoiLeft from "../assets/mechanikoiLeft.png"
+import mechanikoiRight from "../assets/mechanikoiRight.png"
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="flex h-screen flex-col items-center justify-center lg:flex-row">
+  <div class="mt-4 flex flex-col px-6 py-4 text-center lg:mr-48">
+    <p class="text-secondary">{t("hero.first")}</p>
+    <h2 class="text-6xl text-primary drop-shadow-sm lg:text-8xl">
+      MechaniKOI
+    </h2>
+    <h3 class="text-xl text-secondary">{t("hero.second")}</h3>
+    <a href="#games">
+      <button class="mt-12 self-center rounded-sm border-2 border-primary bg-primary p-4 text-lg font-bold text-blackish transition-all hover:bg-blackish hover:text-secondary">
+        {t("hero.button")}
+      </button>
+    </a>
+  </div>
+
+  <div class="mt-24 flex rotate-180 animate-spin">
+    <Image
+      src={mechanikoiLeft}
+      class="h-auto drop-shadow-sm"
+      alt="mechanikoi games logo right image"
+      width={160}
+      height={160}
+    />
+    <Image
+      src={mechanikoiRight}
+      class="h-auto drop-shadow-sm"
+      alt="mechanikoi games logo right image"
+      width={160}
+      height={160}
+    />
+  </div>
+</section>

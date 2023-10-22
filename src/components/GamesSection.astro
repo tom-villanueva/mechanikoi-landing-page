@@ -1,0 +1,43 @@
+---
+import GameCard from "./GameCard.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+import unendingSpaces from "../assets/games/unendingspaces.gif"
+import aos from "../assets/games/aos.png"
+import pjn from "../assets/games/pjn.png"
+import whp from "../assets/games/whp.gif"
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section
+  id="games"
+  class="mx-4 pt-24 flex scroll-mt-32 flex-col items-center"
+>
+  <h2 class="mb-10 text-4xl text-primary lg:text-6xl">
+    {t("games.title")}
+  </h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <GameCard
+      src={unendingSpaces}
+      title="Unending Spaces"
+      href="https://ttlly.itch.io/unendingspaces"
+    />
+    <GameCard
+      src={aos}
+      title="Ace of Swords"
+      href="https://lukahizoalgo.itch.io/ace-of-swords"
+    />
+    <GameCard
+      src={pjn}
+      title="Project N"
+      href="https://ttlly.itch.io/projectn"
+    />
+    <GameCard
+      src={whp}
+      title="Warehouse Paperclips"
+      href="https://lukahizoalgo.itch.io/warehouse-paperclips"
+    />
+  </div>
+</section>

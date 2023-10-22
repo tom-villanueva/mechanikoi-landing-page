@@ -1,0 +1,92 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+	{
+		title: t("header.games"),
+		url: "#games"
+	},
+	{
+		title: t("header.about"),
+		url: "#about"
+	},
+	{
+		title: t("header.contact"),
+		url: "#contact"
+	},
+]
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- SEO -->
+		<meta name="description" content="Welcome to Mechanikoi, the home of captivating indie games! Dive into a world of creativity and passion, where young talents craft unforgettable gaming experiences. Join us now and embark on an adventure like no other." />
+		<meta name="keywords" content="mechanikoi,indie,indie games,indie videogames,indie animation,videogames,games,games by mechanikoi">
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content="Mechanikoi Explore Our Games" />
+		<meta property="og:description" content="The home of mechanikoi games, making captivating indie games! Dive into a world of creativity and passion, where young talents craft unforgettable gaming experiences." />
+		<meta property="og:url" content="" />
+		<meta property="og:site_name" content="Mechanikoi Games" />
+		<meta name="twitter:site" content="@MechanikoiGames"/>
+		
+		<link
+			rel="preload"
+			href="/fonts/Play-Regular.ttf"
+			as="font"
+			crossorigin
+		/>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Header navItems={navItems}/>
+		<slot />
+		<Footer />
+	</body>
+</html>
+
+<style is:global>
+	@font-face {
+		font-family: 'Play';
+		src: url('/fonts/Play-Regular.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	:root {
+		--foreground-rgb: 0, 0, 0;
+		--background-start-rgb: 20, 30, 18;
+		--background-end-rgb: 31, 54, 29;
+	}
+	
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		position: relative;
+		color: rgb(var(--foreground-rgb));
+		background: linear-gradient(
+				to bottom,
+				transparent,
+				rgb(var(--background-end-rgb))
+			)
+			rgb(var(--background-start-rgb));
+	}
+</style>

@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<footer class="mt-24 shrink-0 bg-blackish/80 px-6 py-2">
+  <div class="flex items-center justify-around">
+    <a href="/">
+      <Image
+        src={logo}
+        class="h-auto"
+        alt="Mechanikoi logo icon"
+        height={160}
+      />
+    </a>
+    <div>
+      <p class="text-xs text-primary lg:text-sm">{t("footer.title")}</p>
+      <h4 class="text-2xl text-primary sm:text-left lg:text-4xl">
+        MechaniKOI
+      </h4>
+    </div>
+  </div>
+  <p class="pb-1 pt-2 text-center text-primary/40">
+    - {t("footer.dedicatory")},
+    <a
+      href="https://www.linkedin.com/in/tomas-villanueva-jousset/"
+      target="_blank"
+    >
+      {" "}
+      Tom -
+    </a>
+  </p>
+</footer>
