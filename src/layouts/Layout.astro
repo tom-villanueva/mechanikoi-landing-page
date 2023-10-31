@@ -25,6 +25,10 @@ const navItems = [
 		title: t("header.contact"),
 		url: "#contact"
 	},
+	{
+		title: "Blog",
+		url: `/${lang}/blog`
+	}
 ]
 ---
 
@@ -54,9 +58,11 @@ const navItems = [
 		<title>{title}</title>
 	</head>
 	<body>
-		<Header navItems={navItems}/>
-		<slot />
-		<Footer />
+		<div class="flex flex-col">
+			<Header navItems={navItems}/>
+			<slot />
+			<Footer />
+		</div>
 	</body>
 </html>
 

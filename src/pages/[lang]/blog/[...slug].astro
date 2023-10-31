@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content'
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import Layout from '../../../layouts/Layout.astro';
+
+const urlLang = getLangFromUrl(Astro.url);
+const t = useTranslations(urlLang);
+
+export async function getStaticPaths() {
+  const pages = await getCollection('blog')
+
+  const paths = pages.map(page => {
+    const [lang, ...slug] = page.slug.split('/');
+    return { params: { lang, slug: slug.join('/') || undefined }, props: page }
+  })
+
+  return paths;
+}
+
+const { lang, slug } = Astro.params;
+const page = Astro.props;
+const formattedDate = page.data.date.toLocaleString(
+  lang, 
+  { 
+    year: "numeric", 
+    day: "2-digit", 
+    month: "2-digit" 
+  }
+);
+
+const { Content } = await page.render();
+---
+<Layout title={`Mechanikoi | ${page.data.title}`}>
+  <main class="flex flex-col justify-start mt-40">
+    <section 
+      class="pt-2 flex scroll-mt-32 flex-col items-center justify-center text-center"
+    > 
+      <section class="border-secondary border-y-2 mb-4 w-full">
+        <h1 
+          class="mb-6 text-4xl text-primary lg:text-6xl"
+        >
+          {page.data.title}
+        </h1>
+        <h2 class="text-secondary text-xl">
+          {`${t("blog.written")} ${page.data.author} • ${formattedDate}`}
+        </h2>
+      </section>
+
+      <section 
+        class="block text-secondary prose prose-lg prose-h2:text-primary/90 prose-mechanikoi p-2 lg:p-0"
+      >
+        <Content/>
+      </section>
+    </section>
+  </main>
+</Layout>

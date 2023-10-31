@@ -29,6 +29,9 @@ export const ui = {
     "contact.phoneText": "Número de teléfono",
     "footer.title": "Acepta el encanto de los",
     "footer.dedicatory": "Con amor",
+    "blog.title": "Bienvenidos al blog del Mechanikoi",
+    "blog.subtitle": "Entradas",
+    "blog.written": "Escrito por",
   },
   en: {
     "header.games": "Games",
@@ -53,6 +56,9 @@ export const ui = {
     "contact.phoneText": "Phone number",
     "footer.title": "Embrace the Allure of the",
     "footer.dedicatory": "With love",
+    "blog.title": "Welcome to Mechanikoi's blog",
+    "blog.subtitle": "Entries",
+    "blog.written": "Written by",
   },
 } as const;
 
