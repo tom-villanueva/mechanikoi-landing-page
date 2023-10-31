@@ -12,18 +12,20 @@ const { title } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+const prePath = lang !== "es" ? `${lang}/` : ""
+
 const navItems = [
 	{
 		title: t("header.games"),
-		url: "#games"
+		url: `/${prePath}#games`
 	},
 	{
 		title: t("header.about"),
-		url: "#about"
+		url: `/${prePath}#about`
 	},
 	{
 		title: t("header.contact"),
-		url: "#contact"
+		url: `/${prePath}#contact`
 	},
 	{
 		title: "Blog",

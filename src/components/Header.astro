@@ -2,24 +2,28 @@
 import { Image } from 'astro:assets';
 import logo from "../assets/logo.png";
 import LanguagePicker from './LanguagePicker.astro';
+import { getLangFromUrl } from '../i18n/utils';
 
 type NavItem = {
   title: string,
   url: string
 }
 
+const lang = getLangFromUrl(Astro.url);
+
 interface Props {
   navItems: NavItem[]
 }
 
 const {navItems} = Astro.props;
+const homeUrl = lang !== "es" ? `/${lang}` : "/"
 ---
 
 <header 
   id="page-header"
   class="absolute top-0 z-20 flex w-full items-center justify-between border-b border-transparent px-8 py-4 text-white"
 >
-  <a class="flex items-center gap-3 hover:!text-default" href="/">
+  <a class="flex items-center gap-3 hover:!text-default" href={homeUrl}>
     <h1 class="sr-only">MechaniKOI Game Studio</h1>
     <Image
       src={logo}
