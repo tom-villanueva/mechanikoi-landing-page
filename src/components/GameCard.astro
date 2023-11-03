@@ -22,9 +22,11 @@ const { src, title, href } = Astro.props;
     <Image
       src={src}
       class="h-auto"
-      alt={`game image for ${src}`}
+      alt={`game image for ${title}`}
       width={500}
       height={388}
+      decoding="async"
+      loading="lazy"
     />
   </a>
 </article>
