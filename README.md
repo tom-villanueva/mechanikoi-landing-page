@@ -40,3 +40,20 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+====
+
+HOW TO MAKE CHANGES AND BUILD THE SITE
+
+1) mechanikoi-landing-page -> Abrir solución con Visual Studio
+2) Hacer las modificaciones que hagan falta, para el texto es desde src/pages/index.astro. Las imágenes están en src/assets
+3) Pushear cambios en Git
+
+3) Para buildear: Shift Click derecho en mechanikoi-landing-page. Abrir con terminal, usar comando npm run build.
+4) Crear un zip que contenga los archivos dentro de la carpeta dist, llamarlo dist.zip.
+5) Entrar a CPANEL, File Manager
+6) Dentro de public_html, reemplazar dist.zip con la nueva versión, borrar los otros archivos salvo cgi-bin. 
+7) Descomprimir dist.zip dentro de public/html
+
+Listo! :> gracias tomi
