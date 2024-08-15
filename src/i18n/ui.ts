@@ -48,7 +48,7 @@ export const ui = {
     "about.secondTitle": "Who we are",
     "about.secondParagraph":
       "We are a small group of indie developers based in Argentina. Since we got along well, we decided to join together to start our own studio and improve the quality of our projects. Here programmers, designers, artists and people neat enough to manage our projects, swim together.",
-    "contact.title": "Join the Koimunity",
+    "contact.title": "Join the Koimmunity",
     "contact.firstParagraph":
       "Whether you have questions, suggestions, or just want to chat,",
     "contact.secondParagraph":
