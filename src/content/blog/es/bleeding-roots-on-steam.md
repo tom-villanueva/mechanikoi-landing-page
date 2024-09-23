@@ -1,7 +1,7 @@
 ---
 title: "Bleeding Roots ya está en Steam"
 author: "MechaniKoi"
-date: "2024/10/09"
+date: "2024/09/10"
 ---
 
 # Bleeding Roots ya está disponible en Steam

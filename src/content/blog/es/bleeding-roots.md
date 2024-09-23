@@ -1,7 +1,7 @@
 ---
 title: "Sobre Bleeding Roots"
 author: "Juan 'Totally' Jousset"
-date: "2024/07/09"
+date: "2024/09/08"
 ---
 
 Empezamos MechaniKoi hace más de un año con la esperanza de trabajar juntos para crear algo de lo que pudiéramos sentirnos orgullosos. Aunque en el equipo nos conocemos desde hace un tiempo (incluso habíamos trabajado juntos antes), esta es la primera vez que tenemos la oportunidad de trabajar en algo que podamos llamar propio. Desde las primeras ideas, pasando por el desarrollo y hasta el producto final, estuvimos presentes en cada detalle imperceptible y hasta el último commit en el repositorio.
