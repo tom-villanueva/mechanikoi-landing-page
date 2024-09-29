@@ -21,18 +21,18 @@ pages = pages.filter((page) => page.slug.split("/")[0] === lang)
 <Layout title="Mechanikoi | Blog">
   <main class="flex h-screen flex-col justify-center">
     <section 
-      class="ml-auto mr-auto pt-2 flex scroll-mt-32 flex-col items-center justify-center text-center md:mx-20 md:px-20"
+      class="ml-auto mr-auto pt-2 flex scroll-mt-32 flex-col items-center justify-center md:mx-20 md:px-20"
     > 
       <h1 class="mb-10 text-4xl text-primary lg:text-6xl">
         {t("blog.title")}
       </h1>
       <h2 class="mb-10 text-2xl text-primary lg:text-4xl">
-        {t("blog.subtitle")}:
+        {t("blog.subtitle")}
       </h2>
-      <ul>
+      <ul class="list-disc">
         {
           pages.map((page) => (
-            <li>
+            <li class="text-primary">
               <a class="text-secondary hover:underline" href={`/${lang}/blog/${page.slug.split("/")[1]}`}>
                 {page.data.title}  
               </a>
