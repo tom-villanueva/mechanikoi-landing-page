@@ -52,7 +52,7 @@ let groupedByYear = pages.reduce((acc: { year: number; blogs: any }[], blog) => 
               {blogs.map((page: any) => (
                 <li class="text-primary mb-2">
                   <a
-                    class="text-secondary hover:underline flex flex-col md:flex-row justify-between"
+                    class="text-secondary hover:underline flex flex-col md:flex-row justify-between items-end"
                     href={`/${lang}/blog/${page.slug.split("/")[1]}`}
                   >
                     <span class="text-primary font-bold text-lg">{page.data.title}</span>
