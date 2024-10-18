@@ -7,36 +7,64 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 export async function getStaticPaths() {
-  return [
-    { params: {lang: "es"}},
-    { params: {lang: "en"}}
-  ]
+  return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
 }
 
-let pages = await getCollection('blog');
+let pages = await getCollection("blog");
 
-pages = pages.filter((page) => page.slug.split("/")[0] === lang)
+pages = pages.filter((page) => page.slug.split("/")[0] === lang);
+pages = pages.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+let groupedByYear = pages.reduce((acc: { year: number; blogs: any }[], blog) => {
+  const year = blog.data.date.getFullYear();
+
+  let yearGroup = acc.find(group => group.year === year);
+
+  if (!yearGroup) {
+    yearGroup = { year, blogs: [] };
+    acc.push(yearGroup);
+  }
+
+  yearGroup.blogs.push(blog);
+
+  return acc.sort((a, b) => b.year - a.year);
+}, []);
+
 ---
 
 <Layout title="Mechanikoi | Blog">
   <main class="flex h-screen flex-col justify-center">
-    <section 
-      class="ml-auto mr-auto pt-2 flex scroll-mt-32 flex-col items-center justify-center md:mx-20 md:px-20"
-    > 
+    <section
+      class="ml-auto mr-auto pt-2 flex scroll-mt-32 flex-col items-center justify-center px-6 md:mx-20 md:px-20"
+    >
       <h1 class="mb-10 text-4xl text-primary lg:text-6xl">
         {t("blog.title")}
       </h1>
       <h2 class="mb-10 text-2xl text-primary lg:text-4xl">
         {t("blog.subtitle")}
       </h2>
-      <ul class="list-disc">
+      <ul class="list-disc md:w-3/4 lg:w-2/4 xl:w-1/4">
         {
-          pages.map((page) => (
-            <li class="text-primary">
-              <a class="text-secondary hover:underline" href={`/${lang}/blog/${page.slug.split("/")[1]}`}>
-                {page.data.title}  
-              </a>
-            </li>
+          groupedByYear.map(({ year, blogs }) => (
+            <div class="flex flex-col mb-6">
+              <h2 class="text-xl text-primary">{year}</h2>
+              <div class="w-full border-b-2 border-dashed border-primary my-2" />
+              {blogs.map((page: any) => (
+                <li class="text-primary mb-2">
+                  <a
+                    class="text-secondary hover:underline flex flex-col md:flex-row justify-between"
+                    href={`/${lang}/blog/${page.slug.split("/")[1]}`}
+                  >
+                    <span class="text-primary font-bold text-lg">{page.data.title}</span>
+                    <span>{page.data.date.toLocaleString(lang, {
+                      year: "numeric",
+                      day: "2-digit",
+                      month: "2-digit",
+                    })}</span>
+                  </a>
+                </li>
+              ))}
+            </div>
           ))
         }
       </ul>
