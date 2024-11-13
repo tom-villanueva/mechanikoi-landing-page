@@ -1,32 +1,85 @@
 ---
 import { Image } from "astro:assets";
+import steamLogo from "../assets/steamLogo.png"
+import itchLogo from "../assets/itchLogo.png"
 
 interface Props {
   src: ImageMetadata;
   title: string;
-  href: string;
+  hrefSteam?: string;
+  hrefItch?: string;
 }
 
-const { src, title, href } = Astro.props;
+const { src, title, hrefSteam, hrefItch } = Astro.props;
 ---
 
-<article class="overflow-hidden rounded-lg border-b-2 border-r-2 border-transparent bg-blackish hover:border-b-2 hover:border-r-2 hover:border-primary">
-  <a
-    class="flex flex-col items-center justify-between lg:flex-row"
-    href={href}
-    target="_blank"
+<article 
+  class="overflow-hidden rounded-3xl border-b-2 border-r-2 border-transparent bg-blackish hover:border-b-2 hover:border-r-2 hover:border-primary"
   >
-    <h3 class="ml-2 mr-2 text-xl font-bold uppercase text-secondary">
-      {title}
-    </h3>
-    <Image
-      src={src}
-      class="h-auto"
-      alt={`game image for ${title}`}
-      width={500}
-      height={388}
-      decoding="async"
-      loading="lazy"
-    />
-  </a>
+  <div
+    class="flex flex-col items-center justify-between"
+  >
+    <a href={hrefSteam || hrefItch} target="_blank">
+      <Image
+        src={src}
+        class="h-auto p-2 rounded-3xl"
+        alt={`game image for ${title}`}
+        width={500}
+        height={388}
+        decoding="async"
+        loading="lazy"
+      />
+    </a>
+    <a href={hrefSteam || hrefItch} target="_blank">
+      <h3 class="ml-2 mr-2 pb-2 text-xl font-bold uppercase text-secondary">
+        {title}
+      </h3>
+    </a>
+    <div class="border border-secondary w-3/4"></div>
+    <div class="flex flex-row justify-evenly p-4 pb-4 w-full">
+      {hrefSteam && 
+        (<a href={hrefSteam} target="_blank" class="logo">
+          <Image
+            src={steamLogo}
+            class="h-auto"
+            alt={`steam logo link`}
+            width={25}
+            height={25}
+            decoding="async"
+            loading="lazy"
+          />
+        </a>)
+      }
+      {hrefItch && 
+       ( <a href={hrefItch} target="_blank" class="logo">
+          <Image
+            src={itchLogo}
+            class="h-auto"
+            alt={`itch logo link`}
+            width={25}
+            height={25}
+            decoding="async"
+            loading="lazy"
+          />
+        </a>)
+      }
+    </div>
+  </div>
 </article>
+
+<style>
+  .logo {
+    background-color: rgba(5, 244, 64, 0.5); /* Light background */
+    padding: 8px; /* Add some padding */
+    border-radius: 8px; /* Rounded corners */
+    transition: transform 0.2s ease; /* Smooth hover effect */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+  }
+
+  .logo:hover {
+    background-color: rgba(5, 244, 64, 1);
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  }
+
+</style>
