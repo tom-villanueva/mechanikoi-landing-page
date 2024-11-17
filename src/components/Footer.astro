@@ -5,27 +5,115 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const prePath = lang !== "es" ? `${lang}/` : ""
+
+const footerItems = [
+  {
+		title: t("footer.home"),
+		url: `/${prePath}`
+	},
+	{
+		title: t("footer.games"),
+		url: `/${prePath}#games`
+	},
+	{
+		title: t("footer.about"),
+		url: `/${prePath}#about`
+	},
+	{
+		title: t("footer.contact"),
+		url: `/${prePath}#contact`
+	},
+	{
+		title: "Blog",
+		url: `/${lang}/blog`
+	}
+]
+
+const socialItems = [
+  {
+    title: "Twitter",
+    url: "https://x.com/MechanikoiGames"
+  },
+  {
+    title: "Instagram",
+    url: "https://www.instagram.com/mechanikoi/"
+  },
+  {
+    title: "LinkedIn",
+    url: "https://ar.linkedin.com/company/mechanikoigames"
+  },
+  {
+    title: "YouTube",
+    url: "https://www.youtube.com/@MechaniKoi"
+  },
+  {
+    title: "Steam",
+    url: "https://steamcommunity.com/groups/mechanikoi"
+  },
+  {
+    title: "BlueSky",
+    url: "https://bsky.app/profile/mechanikoigames.bsky.social"
+  },
+]
 ---
-<footer class="mt-24 shrink-0 bg-blackish/80 px-6 py-2 w-full">
-  <div class="flex items-center justify-around">
-    <a href="/">
-      <Image
-        src={logo}
-        class="h-auto"
-        alt="Mechanikoi logo icon"
-        height={160}
-        decoding="async"
-        loading="lazy"
-      />
-    </a>
+<footer class="shrink-0 bg-blackish/80 px-6 w-full">
+  <div class="flex items-start flex-col md:flex-row justify-evenly py-10 gap-y-4">
     <div>
       <p class="text-xs text-primary lg:text-sm">{t("footer.title")}</p>
       <h4 class="text-2xl text-primary sm:text-left lg:text-4xl">
         MechaniKOI
       </h4>
     </div>
+    <!-- <a href="/">
+      <Image
+        src={logo}
+        class="h-auto"
+        alt="Mechanikoi logo icon"
+        height={100}
+        decoding="async"
+        loading="lazy"
+      />
+    </a> -->
+  <div class="flex flex-row gap-x-24">
+
+    <div>
+      <p class="text-primary font-bold pb-4">{t("footer.menu")}</p>
+      <ul class="list-none text-primary">
+        {
+          footerItems.map(({ title, url }) => (
+            <li class="text-xs lg:text-sm pb-1 hover:underline">
+              <a href={url}>
+                {title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-primary font-bold pb-4">{t("footer.social")}</p>
+      <ul class="list-none text-primary">
+        {
+          socialItems.map(({ title, url }) => (
+            <li class="text-xs lg:text-sm pb-1 hover:underline">
+              <a href={url}>
+                {title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+    
   </div>
   <p class="pb-1 pt-2 text-center text-primary/40">
+    © {new Date().getFullYear()} MechaniKoi
+  </p>
+  <p class="pb-1 pt-2 text-xs text-center text-primary/40">
     - {t("footer.dedicatory")},
     <a
       href="https://www.linkedin.com/in/tomas-villanueva-jousset/"
