@@ -21,7 +21,7 @@ export const ui = {
     "about.secondTitle": "¿Quiénes Somos?",
     "about.secondParagraph":
       " Somos un pequeño grupo de desarrolladores independientes con base en Argentina. Como nos llevamos bien, decidimos unirnos para iniciar nuestro propio estudio y elevar la calidad de nuestros proyectos. Aquí programadores, diseñadores, artistas y gente lo bastante ordenada como para gestionar nuestros proyectos, nadamos juntos.",
-    "contact.title": "Únete a la Koimunidad",
+    "contact.title": "Únete a la KOImunidad",
     "contact.firstParagraph":
       "Si tienes preguntas, sugerencias o simplemente quieres charlar,",
     "contact.secondParagraph": "¡Ven a nadar con nosotros!",
@@ -34,7 +34,7 @@ export const ui = {
     "footer.contact": "Contacto",
     "footer.menu": "Menú",
     "footer.social": "Seguinos",
-    "blog.title": "Bienvenidos al blog del Mechanikoi",
+    "blog.title": "Bienvenidos al blog del MechaniKOI",
     "blog.subtitle": "Entradas",
     "blog.written": "Por",
   },
@@ -53,7 +53,7 @@ export const ui = {
     "about.secondTitle": "Who we are",
     "about.secondParagraph":
       "We are a small group of indie developers based in Argentina. Since we got along well, we decided to join together to start our own studio and improve the quality of our projects. Here programmers, designers, artists and people neat enough to manage our projects, swim together.",
-    "contact.title": "Join the Koimmunity",
+    "contact.title": "Join the KOImmunity",
     "contact.firstParagraph":
       "Whether you have questions, suggestions, or just want to chat,",
     "contact.secondParagraph": "Come swim with us!",
@@ -66,7 +66,7 @@ export const ui = {
     "footer.contact": "Contact",
     "footer.menu": "Menu",
     "footer.social": "Follow us",
-    "blog.title": "Welcome to Mechanikoi's blog",
+    "blog.title": "Welcome to MechaniKOI's blog",
     "blog.subtitle": "Entries",
     "blog.written": "by",
   },
