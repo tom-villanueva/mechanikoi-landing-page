@@ -2,9 +2,7 @@
 import GameCard from "./GameCard.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-import unendingSpaces from "../assets/games/unendingspaces.gif"
-import aos from "../assets/games/aos.gif"
-import whp from "../assets/games/whp.gif"
+import iris from "../assets/games/iris.webp"
 import br from "../assets/games/br.png"
 
 const lang = getLangFromUrl(Astro.url);
@@ -20,27 +18,15 @@ const t = useTranslations(lang);
   </h2>
   <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
     <GameCard
+      src={iris}
+      title="Iris Dissolution"
+      hrefSteam="https://store.steampowered.com/app/3349520/Iris_Dissolution"
+    /> 
+    <GameCard
       src={br}
       title="Bleeding Roots"
       hrefItch="https://mechanikoi.itch.io/bleedingroots"
       hrefSteam="https://store.steampowered.com/app/3091770"
-    />
-    <GameCard
-      src={whp}
-      title="Warehouse Paperclips"
-      hrefItch="https://lukahizoalgo.itch.io/warehouse-paperclips"
-    />
-    <GameCard
-      src={unendingSpaces}
-      title="Unending Spaces"
-      hrefItch="https://ttlly.itch.io/unendingspaces"
-    />
-    <GameCard
-      src={aos}
-      title="Ace of Swords"
-      hrefItch="https://lukahizoalgo.itch.io/ace-of-swords"
-    />
-
-    
+    /> 
   </div>
 </section>
