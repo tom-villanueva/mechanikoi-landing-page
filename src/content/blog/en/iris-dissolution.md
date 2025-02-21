@@ -14,8 +14,7 @@ Featuring fixed camera angles, strategic inventory management, intricate puzzles
 
 [![AddToYourWishlist](../../../assets/blogImg/wishlist.webp)](https://store.steampowered.com/app/3349520/Iris_Dissolution/)
 
-Long hours down the road riding her bike led Iris to a desolate town. She is looking for her younger brother, but also for anyone who can help her. After meeting a mysterious old man in a bar, she begins to realize this place is not what it seems. Still, she remains unable to see that it is alive, and that her time is running out. Yet, she is determined to find her brother.
-
+Long hours down the road on her motorcycle led Iris to this desolate town. Looking for her younger brother, she`ll have to settle for any help she can get. After meeting a mysterious old man in a bar, she begins to realize this place is not what it seems. It is alive. With her time running out, she is still determined to find her brother, at any cost.
 ![Img1](../../../assets/blogImg/irisImg1.webp)
 ![Img2](../../../assets/blogImg/irisImg2.webp)
 ![Img3](../../../assets/blogImg/irisImg3.webp)

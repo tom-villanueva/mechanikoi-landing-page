@@ -14,8 +14,7 @@ Con ángulos de cámara fijos, gestión estratégica del inventario y acertijos 
 
 [![AddToYourWishlist](../../../assets/blogImg/wishlist.webp)](https://store.steampowered.com/app/3349520/Iris_Dissolution/)
 
-Tras horas de viaje en motocicleta, Iris llega a un pueblo desolado. Busca a su hermano menor, pero también a quienquiera que pueda ayudarla. Después de encontrarse con un misterioso anciano en un bar, comienza a darse cuenta de que este lugar no es lo que parece. Aun así, sigue sin ver que está vivo y que ella se está quedando sin tiempo. Aún así, está decidida a encontrar a su hermano.
-
+Largas horas en la carretera sobre su motocicleta han traído a Iris a este pueblo desolado. En busca de su hermano menor, tendrá que conformarse con cualquier ayuda que pueda conseguir. Tras conocer a un misterioso anciano en un bar, comienza a darse cuenta de que este lugar no es lo que parece. Está vivo. Con el tiempo en su contra, sigue decidida a encontrar a su hermano, cueste lo que cueste.
 ![Img1](../../../assets/blogImg/irisImg1.webp)
 ![Img2](../../../assets/blogImg/irisImg2.webp)
 ![Img3](../../../assets/blogImg/irisImg3.webp)
