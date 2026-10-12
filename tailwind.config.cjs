@@ -7,12 +7,20 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Play", ...defaultTheme.fontFamily.sans],
+        display: ['"IM Fell English"', ...defaultTheme.fontFamily.serif],
       },
       colors: {
         primary: "#05F440",
         secondary: "#739B6E",
         blackish: "#141E12",
         detail: "#1F361D",
+        // Iris Dissolution palette: rainy night, fog, title bone, inventory ice, tablecloth red
+        night: "#0D1B1E",
+        deep: "#15292D",
+        fog: "#A3B8B4",
+        bone: "#ECE6D6",
+        ice: "#7FD3E6",
+        blood: "#B8323A",
       },
       animation: {
         spin: "spin 20s linear infinite",

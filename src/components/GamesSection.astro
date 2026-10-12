@@ -1,32 +1,48 @@
 ---
-import GameCard from "./GameCard.astro";
+import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-import iris from "../assets/games/iris.webp"
-import br from "../assets/games/br.png"
+import br from "../assets/games/br.png";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section
-  id="games"
-  class="mx-4 pt-24 flex scroll-mt-32 flex-col items-center"
->
-  <h2 class="mb-10 text-4xl text-primary lg:text-6xl">
-    {t("games.title")}
-  </h2>
-  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-    <GameCard
-      src={iris}
-      title="Iris Dissolution"
-      hrefSteam="https://store.steampowered.com/app/3349520/Iris_Dissolution"
-    /> 
-    <GameCard
-      src={br}
-      title="Bleeding Roots"
-      hrefItch="https://mechanikoi.itch.io/bleedingroots"
-      hrefSteam="https://store.steampowered.com/app/3091770"
-    /> 
+<section id="games" class="scroll-mt-24 border-t border-fog/20 px-4 py-24 sm:px-8">
+  <div class="mx-auto max-w-6xl">
+    <h2 class="font-display text-3xl text-bone md:text-4xl">{t("games.title")}</h2>
+    <article class="mt-10 grid items-center gap-8 md:grid-cols-2 md:gap-12">
+      <Image
+        src={br}
+        alt={t("games.br.title")}
+        width={600}
+        height={338}
+        class="h-auto w-full"
+        loading="lazy"
+      />
+      <div>
+        <h3 class="font-display text-3xl text-bone">{t("games.br.title")}</h3>
+        <p class="mt-2 text-sm text-fog">{t("games.br.meta")}</p>
+        <p class="mt-4 max-w-prose text-lg leading-relaxed">{t("games.br.desc")}</p>
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <a
+            href="https://store.steampowered.com/app/3091770"
+            target="_blank"
+            rel="noopener"
+            class="border-2 border-bone px-5 py-3 font-bold text-bone transition-colors hover:bg-bone hover:text-night"
+          >
+            {t("games.br.steam")}
+          </a>
+          <a
+            href="https://mechanikoi.itch.io/bleedingroots"
+            target="_blank"
+            rel="noopener"
+            class="inline-block py-2 text-bone underline decoration-ice/60 underline-offset-8 hover:decoration-ice"
+          >
+            {t("games.br.itch")}
+          </a>
+        </div>
+      </div>
+    </article>
   </div>
 </section>

@@ -31,7 +31,7 @@ const formattedDate = page.data.date.toLocaleString(
 const { Content } = await page.render();
 ---
 <Layout title={`Mechanikoi | ${page.data.title}`}>
-  <main class="flex flex-col justify-start mt-40">
+  <main id="main" class="flex flex-col justify-start mt-40">
     <section 
       class="pt-2 flex scroll-mt-32 flex-col items-center justify-center text-center"
     > 

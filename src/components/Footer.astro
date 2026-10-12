@@ -58,13 +58,13 @@ const socialItems = [
   },
 ]
 ---
-<footer class="shrink-0 bg-blackish/80 px-6 w-full">
-  <div class="flex items-start flex-col md:flex-row justify-evenly py-10 gap-y-4">
+<footer class="w-full shrink-0 border-t border-fog/20 bg-night px-4 sm:px-8">
+  <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-10 py-12 md:flex-row">
     <div>
-      <h4 class="text-2xl text-primary sm:text-left lg:text-4xl">
+      <p class="font-display text-3xl text-bone">
         MechaniKOI
-      </h4>
-      <p class="text-xs text-primary lg:text-sm">{t("footer.title")}</p>
+      </p>
+      <p class="mt-1 text-sm text-fog">{t("footer.title")}</p>
     </div>
     <!-- <a href="/">
       <Image
@@ -76,15 +76,15 @@ const socialItems = [
         loading="lazy"
       />
     </a> -->
-  <div class="flex flex-row gap-x-24">
+  <div class="flex flex-row gap-x-16 sm:gap-x-24">
 
     <div>
-      <p class="text-primary font-bold pb-4">{t("footer.menu")}</p>
-      <ul class="list-none text-primary">
+      <p class="pb-3 text-sm text-fog">{t("footer.menu")}</p>
+      <ul class="list-none text-bone">
         {
           footerItems.map(({ title, url }) => (
-            <li class="text-xs lg:text-sm pb-1 hover:underline">
-              <a href={url}>
+            <li class="text-sm hover:underline">
+              <a class="inline-block py-1.5" href={url}>
                 {title}
               </a>
             </li>
@@ -94,12 +94,12 @@ const socialItems = [
     </div>
 
     <div>
-      <p class="text-primary font-bold pb-4">{t("footer.social")}</p>
-      <ul class="list-none text-primary">
+      <p class="pb-3 text-sm text-fog">{t("footer.social")}</p>
+      <ul class="list-none text-bone">
         {
           socialItems.map(({ title, url }) => (
-            <li class="text-xs lg:text-sm pb-1 hover:underline">
-              <a href={url}>
+            <li class="text-sm hover:underline">
+              <a class="inline-block py-1.5" href={url} target="_blank" rel="noopener">
                 {title}
               </a>
             </li>
@@ -110,17 +110,11 @@ const socialItems = [
   </div>
     
   </div>
-  <p class="pb-1 pt-2 text-center text-primary/40">
+  <p class="pb-1 pt-2 text-center text-sm text-fog/70">
     © {new Date().getFullYear()} MechaniKOI
   </p>
-  <p class="pb-1 pt-2 text-xs text-center text-primary/40">
-    - {t("footer.dedicatory")},
-    <a
-      href="https://www.linkedin.com/in/tomas-villanueva-jousset/"
-      target="_blank"
-    >
-      {" "}
-      Tom -
-    </a>
+  <p class="pb-6 pt-1 text-center text-xs text-fog/70">
+    {t("footer.dedicatory")}{" "}
+    <a class="underline" href="https://www.linkedin.com/in/tomas-villanueva-jousset/" target="_blank" rel="noopener">Tom</a>
   </p>
 </footer>

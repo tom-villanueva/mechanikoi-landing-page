@@ -2,43 +2,68 @@
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-import mechanikoiLeft from "../assets/mechanikoiLeft.png"
-import mechanikoiRight from "../assets/mechanikoiRight.png"
+// PLACEHOLDER: stand-in screenshot. Replace with 2560x1440 Iris key art with no logo text,
+// Iris on the right third and a dark lower-left area for the title.
+import heroArt from "../assets/blogImg/irisImg1.webp";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="flex h-screen flex-col items-center justify-center lg:flex-row">
-  <div class="mt-4 flex flex-col md:px-6 py-4 text-center lg:mr-48">
-    <p class="text-secondary">{t("hero.first")}</p>
-    <h2 class="text-6xl text-primary drop-shadow-sm lg:text-8xl">
-      MechaniKOI
-    </h2>
-    <h3 class="text-xl text-secondary">{t("hero.second")}</h3>
-    <a href="#games">
-      <button class="mt-12 self-center rounded-sm border-2 border-primary bg-primary p-4 text-lg font-bold text-blackish transition-all hover:bg-blackish hover:text-secondary">
-        {t("hero.button")}
-      </button>
-    </a>
-  </div>
+<section class="relative isolate flex min-h-[100svh] items-end overflow-hidden">
+  <Image
+    src={heroArt}
+    alt=""
+    class="hero-art absolute inset-0 -z-20 h-full w-full object-cover object-[70%_50%]"
+    widths={[960, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-night via-night/70 to-night/20"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-night/90 via-night/40 to-transparent"></div>
 
-  <div class="mt-24 flex rotate-180 animate-spin">
-    <Image
-      src={mechanikoiLeft}
-      class="h-auto drop-shadow-sm"
-      alt="mechanikoi games logo right image"
-      width={145}
-      height={145}
-      loading={"eager"}
-    />
-    <Image
-      src={mechanikoiRight}
-      class="h-auto drop-shadow-sm"
-      alt="mechanikoi games logo right image"
-      width={145}
-      height={145}
-      loading={"eager"}
-    />
+  <div class="mx-auto w-full max-w-6xl px-4 pb-16 pt-40 sm:px-8 md:pb-24">
+    <h1 class="font-display leading-[0.85] text-bone">
+      <span class="block text-[clamp(4rem,18vw,10rem)]">{t("hero.title1")}</span>
+      <span class="dissolve block text-[clamp(3.25rem,15vw,9rem)]">{t("hero.title2")}</span>
+    </h1>
+    <p class="mt-6 max-w-[34ch] text-lg text-bone/90 md:text-xl">
+      {t("hero.tagline")}
+    </p>
+    <div class="mt-10 flex flex-wrap items-center gap-4">
+      <a
+        href="https://store.steampowered.com/app/3349520/Iris_Dissolution"
+        target="_blank"
+        rel="noopener"
+        class="bg-blood px-6 py-4 text-lg font-bold text-bone transition-colors hover:bg-bone hover:text-night"
+      >
+        {t("hero.wishlist")}
+      </a>
+      <a href="#iris" class="py-4 text-lg text-bone underline decoration-ice/60 underline-offset-8 hover:decoration-ice">
+        {t("hero.more")}
+      </a>
+    </div>
+    <p class="mt-8 text-sm text-fog">{t("hero.platform")}</p>
   </div>
 </section>
+
+<style>
+  /* the title's second word literally dissolves into ordered-dither pixels */
+  .dissolve {
+    width: fit-content;
+    padding-right: 0.15em;
+    -webkit-mask: url("/dissolve.svg") 0 0 / 100% 100% no-repeat;
+    mask: url("/dissolve.svg") 0 0 / 100% 100% no-repeat;
+  }
+
+  .hero-art {
+    animation: boot 1.6s ease-out both;
+  }
+
+  @keyframes boot {
+    from {
+      opacity: 0;
+    }
+  }
+</style>
