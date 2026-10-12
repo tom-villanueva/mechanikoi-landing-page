@@ -47,11 +47,13 @@ export const ui = {
     "games.br.meta": "Gratis, unos 15 minutos",
     "games.br.steam": "Jugar gratis en Steam",
     "games.br.itch": "Jugar gratis en itch.io",
-    "about.title": "A contracorriente",
+    "about.title": "Sobre nosotros",
+    "about.firstTitle": "¿Qué hacemos?",
     "about.firstParagraph":
-      "Somos un estudio independiente de Argentina: programadores, artistas, diseñadores y alguien lo bastante ordenado como para que todo salga a tiempo.",
+      "Para nosotros, las historias forman lentes por los que ver el mundo, y los videojuegos son un gran lienzo para contarlas. Queremos crear experiencias que signifiquen - algo - para quien las atraviese, aún si debemos ir contracorriente para lograrlo.",
+    "about.secondTitle": "¿Quiénes Somos?",
     "about.secondParagraph":
-      "Hacemos juegos que cuentan historias, de esas que te quedan dando vueltas después de apagar la consola. Aunque tengamos que nadar contra la corriente.",
+      " Somos un pequeño grupo de desarrolladores independientes con base en Argentina. Como nos llevamos bien, decidimos unirnos para iniciar nuestro propio estudio y elevar la calidad de nuestros proyectos. Aquí programadores, diseñadores, artistas y gente lo bastante ordenada como para gestionar nuestros proyectos, nadamos juntos.",
     "about.photoNote": "Foto del equipo",
     "contact.title": "Nadá con nosotros",
     "contact.firstParagraph":
@@ -111,11 +113,13 @@ export const ui = {
     "games.br.meta": "Free, about 15 minutes",
     "games.br.steam": "Play free on Steam",
     "games.br.itch": "Play free on itch.io",
-    "about.title": "Against the current",
+    "about.title": "About us",
+    "about.firstTitle": "What we do",
     "about.firstParagraph":
-      "We're an indie studio from Argentina: programmers, artists, designers, and one person organized enough to keep everything on schedule.",
+      "For us, stories are lenses through which to see the world, and videogames are a great canvas to tell them. We want to create experiences that mean - something - to whoever goes through them, even if we have to go against the current to do so.",
+    "about.secondTitle": "Who we are",
     "about.secondParagraph":
-      "We make story-driven games, the kind that stay with you after the screen goes dark. Even if we have to swim against the current to get there.",
+      "We are a small group of indie developers based in Argentina. Since we got along well, we decided to join together to start our own studio and improve the quality of our projects. Here programmers, designers, artists and people neat enough to manage our projects, swim together.",
     "about.photoNote": "Team photo",
     "contact.title": "Swim with us",
     "contact.firstParagraph":

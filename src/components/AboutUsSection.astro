@@ -14,8 +14,10 @@ const t = useTranslations(lang);
       <Image src={logo} alt="" width={90} height={157} class="h-auto w-14 shrink-0 self-start sm:w-20" loading="lazy" />
       <div>
         <h2 class="font-display text-3xl text-bone md:text-4xl">{t("about.title")}</h2>
-        <p class="mt-6 max-w-prose text-lg leading-relaxed">{t("about.firstParagraph")}</p>
-        <p class="mt-4 max-w-prose text-lg leading-relaxed">{t("about.secondParagraph")}</p>
+        <h3 class="mt-8 text-xl font-bold text-bone">{t("about.firstTitle")}</h3>
+        <p class="mt-3 max-w-prose text-lg leading-relaxed">{t("about.firstParagraph")}</p>
+        <h3 class="mt-8 text-xl font-bold text-bone">{t("about.secondTitle")}</h3>
+        <p class="mt-3 max-w-prose text-lg leading-relaxed">{t("about.secondParagraph")}</p>
       </div>
     </div>
     <!-- PLACEHOLDER: team photo, 4:3, the team at their desks or at an event. -->
