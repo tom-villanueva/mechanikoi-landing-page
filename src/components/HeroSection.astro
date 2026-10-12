@@ -2,9 +2,9 @@
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-// PLACEHOLDER: stand-in screenshot. Replace with 2560x1440 Iris key art with no logo text,
-// Iris on the right third and a dark lower-left area for the title.
-import heroArt from "../assets/blogImg/irisImg1.webp";
+import rooftop from "../assets/iris/hero-rooftop.jpg";
+import irisCutout from "../assets/iris/iris-cutout.png";
+import irisLogo from "../assets/iris/iris-logo.png";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -12,23 +12,38 @@ const t = useTranslations(lang);
 
 <section class="relative isolate flex min-h-[100svh] items-end overflow-hidden">
   <Image
-    src={heroArt}
+    src={rooftop}
     alt=""
-    class="hero-art absolute inset-0 -z-20 h-full w-full object-cover object-[70%_50%]"
-    widths={[960, 1920]}
+    class="absolute inset-0 -z-30 h-full w-full object-cover"
+    widths={[960, 1600]}
     sizes="100vw"
+    loading="eager"
+  />
+  <!-- Iris looks back toward the title; anchored right so phones keep her face in view -->
+  <Image
+    src={irisCutout}
+    alt=""
+    class="hero-iris absolute -right-[22%] top-16 -z-20 h-[60svh] w-auto sm:-right-[6%] md:bottom-0 md:right-[3%] md:top-auto md:h-[92%]"
+    widths={[480, 900]}
+    sizes="(min-width: 768px) 520px, 60vw"
     loading="eager"
     fetchpriority="high"
   />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-night via-night/70 to-night/20"></div>
-  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-night/90 via-night/40 to-transparent"></div>
+  <div class="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-gradient-to-t from-night via-night/80 to-transparent md:h-1/2 md:via-night/40"></div>
+  <div class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-night/80 via-night/30 to-transparent md:block"></div>
 
   <div class="mx-auto w-full max-w-6xl px-4 pb-16 pt-40 sm:px-8 md:pb-24">
-    <h1 class="font-display leading-[0.85] text-bone">
-      <span class="block text-[clamp(4rem,18vw,10rem)]">{t("hero.title1")}</span>
-      <span class="dissolve block text-[clamp(3.25rem,15vw,9rem)]">{t("hero.title2")}</span>
+    <h1>
+      <Image
+        src={irisLogo}
+        alt={t("hero.logoAlt")}
+        widths={[400, 800, 1200]}
+        sizes="(min-width: 768px) 600px, 90vw"
+        class="h-auto w-[min(90vw,600px)]"
+        loading="eager"
+      />
     </h1>
-    <p class="mt-6 max-w-[34ch] text-lg text-bone/90 md:text-xl">
+    <p class="mt-8 max-w-[34ch] text-lg text-bone/90 md:text-xl">
       {t("hero.tagline")}
     </p>
     <div class="mt-10 flex flex-wrap items-center gap-4">
@@ -40,7 +55,7 @@ const t = useTranslations(lang);
       >
         {t("hero.wishlist")}
       </a>
-      <a href="#iris" class="py-4 text-lg text-bone underline decoration-ice/60 underline-offset-8 hover:decoration-ice">
+      <a href="#iris" class="inline-block py-4 text-lg text-bone underline decoration-ice/60 underline-offset-8 hover:decoration-ice">
         {t("hero.more")}
       </a>
     </div>
@@ -49,21 +64,14 @@ const t = useTranslations(lang);
 </section>
 
 <style>
-  /* the title's second word literally dissolves into ordered-dither pixels */
-  .dissolve {
-    width: fit-content;
-    padding-right: 0.15em;
-    -webkit-mask: url("/dissolve.svg") 0 0 / 100% 100% no-repeat;
-    mask: url("/dissolve.svg") 0 0 / 100% 100% no-repeat;
+  .hero-iris {
+    animation: emerge 1.8s ease-out both;
   }
 
-  .hero-art {
-    animation: boot 1.6s ease-out both;
-  }
-
-  @keyframes boot {
+  @keyframes emerge {
     from {
       opacity: 0;
+      transform: translateY(1.5rem);
     }
   }
 </style>
