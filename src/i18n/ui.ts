@@ -54,7 +54,7 @@ export const ui = {
     "about.secondTitle": "¿Quiénes Somos?",
     "about.secondParagraph":
       " Somos un pequeño grupo de desarrolladores independientes con base en Argentina. Como nos llevamos bien, decidimos unirnos para iniciar nuestro propio estudio y elevar la calidad de nuestros proyectos. Aquí programadores, diseñadores, artistas y gente lo bastante ordenada como para gestionar nuestros proyectos, nadamos juntos.",
-    "about.imageAlt": "Dos koi dibujados en verde, con anteojos y peinados como miembros del equipo, nadando entre algas",
+    "about.imageAlt": "Dos integrantes de MechaniKOI con remeras del estudio, sentados en los escalones de un edificio",
     "contact.title": "Nadá con nosotros",
     "contact.firstParagraph":
       "Novedades del desarrollo, detrás de escena y charla directa con el equipo. Todo pasa en Discord.",
@@ -120,7 +120,7 @@ export const ui = {
     "about.secondTitle": "Who we are",
     "about.secondParagraph":
       "We are a small group of indie developers based in Argentina. Since we got along well, we decided to join together to start our own studio and improve the quality of our projects. Here programmers, designers, artists and people neat enough to manage our projects, swim together.",
-    "about.imageAlt": "Two green line-drawn koi with glasses and the team's hairstyles, swimming among seaweed",
+    "about.imageAlt": "Two MechaniKOI team members in studio t-shirts, sitting on the steps of a building",
     "contact.title": "Swim with us",
     "contact.firstParagraph":
       "Dev updates, behind-the-scenes looks, and direct chats with the team. It all happens on Discord.",

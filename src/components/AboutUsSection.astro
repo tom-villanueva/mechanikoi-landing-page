@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import teamKoi from "../assets/team-koi.png";
+import logo from "../assets/logo.png";
+import team from "../assets/team.jpg";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -9,19 +10,23 @@ const t = useTranslations(lang);
 
 <section id="about" class="scroll-mt-24 border-t border-fog/20 px-4 py-24 sm:px-8">
   <div class="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[3fr_2fr]">
-    <div>
-      <h2 class="font-display text-3xl text-bone md:text-4xl">{t("about.title")}</h2>
-      <h3 class="mt-8 text-xl font-bold text-bone">{t("about.firstTitle")}</h3>
-      <p class="mt-3 max-w-prose text-lg leading-relaxed">{t("about.firstParagraph")}</p>
-      <h3 class="mt-8 text-xl font-bold text-bone">{t("about.secondTitle")}</h3>
+    <div class="flex gap-6 sm:gap-10">
+      <!-- the koi swims upward: against the current -->
+      <Image src={logo} alt="" width={90} height={157} class="h-auto w-14 shrink-0 self-start sm:w-20" loading="lazy" />
+        <div>
+        <h2 class="font-display text-3xl text-bone md:text-4xl">{t("about.title")}</h2>
+        <h3 class="mt-8 text-xl font-bold text-bone">{t("about.firstTitle")}</h3>
+        <p class="mt-3 max-w-prose text-lg leading-relaxed">{t("about.firstParagraph")}</p>
+        <h3 class="mt-8 text-xl font-bold text-bone">{t("about.secondTitle")}</h3>
       <p class="mt-3 max-w-prose text-lg leading-relaxed">{t("about.secondParagraph")}</p>
+      </div>
     </div>
     <Image
-      src={teamKoi}
+      src={team}
       alt={t("about.imageAlt")}
       widths={[480, 800]}
       sizes="(min-width: 768px) 40vw, 100vw"
-      class="mx-auto h-auto w-full max-w-md"
+      class="mx-auto aspect-[4/5] h-auto w-full max-w-md object-cover object-[50%_70%]"
       loading="lazy"
     />
   </div>
