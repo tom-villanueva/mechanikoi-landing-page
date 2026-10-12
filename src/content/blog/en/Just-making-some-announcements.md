@@ -2,6 +2,8 @@
 title: "Just making some announcements"
 author: "Juan 'Totally' Jousset"
 date: "2024/09/21"
+description: "Bleeding Roots by the numbers, where to find us at FIJA and EVA, and a first teaser of what's next."
+cover: "../../../assets/blogImg/someannouncements_1.png"
 ---
 
 So, a bunch of things have happened over these past few weeks, and since it's now spring IRL (at least for us in the southern hemisphere), I think it's the perfect time to make some announcements!

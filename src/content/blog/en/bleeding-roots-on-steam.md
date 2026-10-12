@@ -2,9 +2,11 @@
 title: "Bleeding Roots is now on Steam"
 author: "MechaniKoi"
 date: "2024/09/10"
+description: "Our short horror walking simulator is out now on Steam, free to play."
+cover: "../../../assets/blogImg/steamlaunch_1.jpg"
 ---
 
-# Bleeding Roots is finally available on Steam!
+## Bleeding Roots is finally available on Steam!
 
 ![Cover](../../../assets/blogImg/steamlaunch_1.jpg)
 

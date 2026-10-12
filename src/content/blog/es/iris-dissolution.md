@@ -2,6 +2,8 @@
 title: "Iris Dissolution"
 author: "MechaniKOI"
 date: "2025/02/21"
+description: "Nuestro nuevo survival horror: cámaras fijas, un pueblo desolado y una historia sobre el duelo."
+cover: "../../../assets/games/iris.webp"
 ---
 
 ## Iris Dissolution

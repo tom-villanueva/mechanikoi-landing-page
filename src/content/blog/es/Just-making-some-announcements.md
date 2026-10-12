@@ -2,6 +2,8 @@
 title: "Haciendo algunos anuncios"
 author: "Juan 'Totally' Jousset"
 date: "2024/09/21"
+description: "Bleeding Roots en números, dónde encontrarnos en FIJA y EVA, y un primer adelanto de lo que viene."
+cover: "../../../assets/blogImg/someannouncements_1.png"
 ---
 
 Bueno, pasaron un montón de cosas en estas últimas semanas, y como ahora es primavera IRL (al menos para nosotros en el hemisferio sur), creo que es el momento perfecto para hacer algunos anuncios!

@@ -68,9 +68,11 @@ export const ui = {
     "footer.contact": "Comunidad",
     "footer.menu": "Menú",
     "footer.social": "Síguenos",
-    "blog.title": "Bienvenidos al blog del MechaniKOI",
-    "blog.subtitle": "Entradas",
+    "blog.title": "Blog",
+    "blog.subtitle": "Novedades, devlogs y detrás de escena del estudio.",
     "blog.written": "Por",
+    "blog.read": "Leer entrada",
+    "blog.back": "Todas las entradas",
   },
   en: {
     "header.iris": "Iris Dissolution",
@@ -134,9 +136,11 @@ export const ui = {
     "footer.contact": "Community",
     "footer.menu": "Menu",
     "footer.social": "Follow us",
-    "blog.title": "Welcome to MechaniKOI's blog",
-    "blog.subtitle": "Entries",
-    "blog.written": "by",
+    "blog.title": "Blog",
+    "blog.subtitle": "News, devlogs, and behind-the-scenes from the studio.",
+    "blog.written": "By",
+    "blog.read": "Read post",
+    "blog.back": "All posts",
   },
 } as const;
 

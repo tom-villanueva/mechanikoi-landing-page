@@ -1,73 +1,77 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
 }
 
-let pages = await getCollection("blog");
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-pages = pages.filter((page) => page.slug.split("/")[0] === lang);
-pages = pages.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const posts = (await getCollection("blog"))
+  .filter((post) => post.slug.split("/")[0] === lang)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-let groupedByYear = pages.reduce((acc: { year: number; blogs: any }[], blog) => {
-  const year = blog.data.date.getFullYear();
+const [latest, ...older] = posts;
 
-  let yearGroup = acc.find(group => group.year === year);
+const byYear = new Map<number, typeof older>();
+for (const post of older) {
+  const year = post.data.date.getFullYear();
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
 
-  if (!yearGroup) {
-    yearGroup = { year, blogs: [] };
-    acc.push(yearGroup);
-  }
-
-  yearGroup.blogs.push(blog);
-
-  return acc.sort((a, b) => b.year - a.year);
-}, []);
-
+const href = (post: (typeof posts)[number]) => `/${lang}/blog/${post.slug.split("/")[1]}`;
+const formatDate = (d: Date) => d.toLocaleDateString(lang, { day: "numeric", month: "long", year: "numeric" });
 ---
 
-<Layout title="Mechanikoi | Blog">
-  <main id="main" class="flex min-h-screen flex-col justify-center pt-32 pb-16">
-    <section
-      class="ml-auto mr-auto pt-2 flex scroll-mt-32 flex-col items-center justify-center px-6 md:mx-20 md:px-20"
-    >
-      <h1 class="mb-10 text-4xl text-primary lg:text-6xl">
-        {t("blog.title")}
-      </h1>
-      <h2 class="mb-10 text-2xl text-primary lg:text-4xl">
-        {t("blog.subtitle")}
-      </h2>
-      <ul class="list-disc md:w-3/4 lg:w-2/4 xl:w-1/4">
-        {
-          groupedByYear.map(({ year, blogs }) => (
-            <div class="flex flex-col mb-6">
-              <h2 class="text-xl text-primary">{year}</h2>
-              <div class="w-full border-b-2 border-dashed border-primary my-2" />
-              {blogs.map((page: any) => (
-                <li class="text-primary mb-2">
-                  <a
-                    class="text-secondary hover:underline flex flex-col md:flex-row justify-between items-end"
-                    href={`/${lang}/blog/${page.slug.split("/")[1]}`}
-                  >
-                    <span class="text-primary font-bold text-lg">{page.data.title}</span>
-                    <span>{page.data.date.toLocaleString(lang, {
-                      year: "numeric",
-                      day: "2-digit",
-                      month: "2-digit",
-                    })}</span>
-                  </a>
-                </li>
-              ))}
-            </div>
-          ))
-        }
-      </ul>
-    </section>
+<Layout title="MechaniKOI | Blog">
+  <main id="main" class="px-4 pb-24 pt-32 sm:px-8 md:pt-40">
+    <div class="mx-auto max-w-6xl">
+      <h1 class="font-display text-5xl text-bone md:text-7xl">{t("blog.title")}</h1>
+      <p class="mt-4 max-w-[48ch] text-lg">{t("blog.subtitle")}</p>
+
+      {latest && (
+        <article class="group relative mt-14 grid items-center gap-8 border-2 border-ice/40 bg-deep p-4 transition-colors hover:border-ice md:grid-cols-2 md:gap-12 md:p-6">
+          {latest.data.cover && (
+            <Image src={latest.data.cover} alt="" widths={[480, 800]} sizes="(min-width: 768px) 560px, 100vw" class="aspect-video h-auto w-full object-cover" />
+          )}
+          <div>
+            <time datetime={latest.data.date.toISOString()} class="text-sm text-fog">{formatDate(latest.data.date)}</time>
+            <h2 class="mt-2 font-display text-3xl text-bone md:text-5xl">
+              <a href={href(latest)} class="after:absolute after:inset-0">{latest.data.title}</a>
+            </h2>
+            {latest.data.description && <p class="mt-4 max-w-prose text-lg leading-relaxed">{latest.data.description}</p>}
+            <p class="mt-6 inline-block text-bone underline decoration-ice/60 underline-offset-8 group-hover:decoration-ice">{t("blog.read")}</p>
+          </div>
+        </article>
+      )}
+
+      {[...byYear].map(([year, list]) => (
+        <section class="mt-20">
+          <h2 class="border-b border-fog/20 pb-3 font-display text-2xl text-bone">{year}</h2>
+          <ul>
+            {list.map((post) => (
+              <li class="border-b border-fog/20">
+                <article class="group relative grid grid-cols-[6.5rem_1fr] items-start gap-4 py-6 sm:grid-cols-[12rem_1fr] sm:gap-8">
+                  {post.data.cover && (
+                    <Image src={post.data.cover} alt="" width={384} class="aspect-video h-auto w-full object-cover opacity-80 transition-opacity group-hover:opacity-100" />
+                  )}
+                  <div>
+                    <time datetime={post.data.date.toISOString()} class="text-sm text-fog">{formatDate(post.data.date)}</time>
+                    <h3 class="mt-1 font-display text-xl text-bone sm:text-2xl">
+                      <a href={href(post)} class="underline decoration-transparent underline-offset-8 after:absolute after:inset-0 group-hover:decoration-ice">{post.data.title}</a>
+                    </h3>
+                    {post.data.description && <p class="mt-2 max-w-prose">{post.data.description}</p>}
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
   </main>
 </Layout>
