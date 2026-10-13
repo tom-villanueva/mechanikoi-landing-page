@@ -2,13 +2,14 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { SHOW_BLOG } from "../config";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const prePath = lang !== "es" ? `${lang}/` : ""
 
-const footerItems = [
+const allFooterItems = [
   {
 		title: t("footer.home"),
 		url: `/${prePath}`
@@ -30,6 +31,8 @@ const footerItems = [
 		url: `/${lang}/blog`
 	}
 ]
+
+const footerItems = allFooterItems.filter((item) => SHOW_BLOG || item.title !== "Blog")
 
 const socialItems = [
   {

@@ -2,6 +2,7 @@
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { SHOW_BLOG } from "../config";
 
 interface Props {
 	title: string;
@@ -14,7 +15,7 @@ const t = useTranslations(lang);
 
 const prePath = lang !== "es" ? `${lang}/` : ""
 
-const navItems = [
+const allNavItems = [
 	{
 		title: t("header.iris"),
 		url: `/${prePath}#iris`
@@ -36,6 +37,8 @@ const navItems = [
 		url: `/${lang}/blog`
 	}
 ]
+
+const navItems = allNavItems.filter((item) => SHOW_BLOG || item.title !== "Blog")
 ---
 
 <!doctype html>

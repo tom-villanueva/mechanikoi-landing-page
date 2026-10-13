@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { SHOW_BLOG } from "../config";
 
 import shotCamera from "../assets/iris/stairwell.png";
 import shotAmmo from "../assets/iris/hallway.png";
@@ -36,9 +37,11 @@ const items = [
         >
           {t("iris.cta")}
         </a>
+        {SHOW_BLOG && (
         <a href={`/${lang}/blog/iris-dissolution`} class="inline-block py-2 text-bone underline decoration-ice/60 underline-offset-8 hover:decoration-ice">
           {t("iris.devlog")}
         </a>
+        )}
         <a
           href="https://drive.google.com/drive/folders/12HAT3lyDOPyLl13dgNdBhOCcvzCULKC6?usp=drive_link"
           target="_blank"
