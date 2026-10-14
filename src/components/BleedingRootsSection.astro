@@ -29,7 +29,6 @@ const seasons = [
       <h2 class="font-type text-3xl leading-tight text-ink md:text-4xl">{t("br.title")}</h2>
       <p class="mt-8 max-w-prose text-lg leading-relaxed">{t("br.story1")}</p>
       <p class="mt-4 max-w-prose text-lg leading-relaxed">{t("br.story2")}</p>
-      <p class="mt-4 max-w-prose text-lg leading-relaxed text-ink">{t("br.story3")}</p>
       <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
         <a
           href="https://store.steampowered.com/app/3091770"
@@ -54,7 +53,7 @@ const seasons = [
     <div class="seasons self-start border border-accent/40 bg-raised p-3 sm:p-4">
       <h3 class="sr-only">{t("br.seasons")}</h3>
       <p class="mb-3 px-1 text-sm text-muted">{t("br.seasonsHint")}</p>
-      <div role="tablist" aria-label={t("br.seasons")} class="grid grid-cols-4 gap-2 sm:gap-3">
+      <div role="tablist" aria-label={t("br.seasons")} class="flex gap-2 sm:gap-3">
         {seasons.map((s, i) => (
           <button
             type="button"
@@ -63,10 +62,10 @@ const seasons = [
             aria-controls={`panel-${s.id}`}
             aria-selected={i === 0 ? "true" : "false"}
             tabindex={i === 0 ? 0 : -1}
-            class="season"
+            class="season w-1/4 max-w-[96px]"
             style={`--season: ${s.color}`}
           >
-            <Image src={s.icon} alt="" width={128} height={128} class="aspect-square h-auto w-full" loading="lazy" />
+            <Image src={s.icon} alt="" width={96} height={96} densities={[1, 2]} class="aspect-square h-auto w-full" loading="lazy" />
             <span class="sr-only">{s.name}</span>
           </button>
         ))}
