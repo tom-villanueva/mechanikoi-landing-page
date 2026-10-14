@@ -1,9 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "../i18n/utils";
-
-import mechanikoiLeft from "../assets/mechanikoiLeft.png";
-import mechanikoiRight from "../assets/mechanikoiRight.png";
+import KoiSwim from "./KoiSwim.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,8 +16,7 @@ const translatePath = useTranslatedPath(lang);
     aria-hidden="true"
   >
     <div class="relative h-full w-full animate-spin [animation-direction:reverse] [animation-duration:45s]">
-      <Image src={mechanikoiLeft} class="absolute left-0 top-[14%] h-[72%] w-[72%] drop-shadow-sm" alt="" widths={[600, 1000]} sizes="(min-width: 768px) 42vw, 83vw" loading="eager" />
-      <Image src={mechanikoiRight} class="absolute right-0 top-[14%] h-[72%] w-[72%] drop-shadow-sm" alt="" widths={[600, 1000]} sizes="(min-width: 768px) 42vw, 83vw" loading="eager" />
+      <KoiSwim />
     </div>
   </div>
 
