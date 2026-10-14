@@ -100,7 +100,7 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...na
 
 	/* RGB triplets for the theme tokens in tailwind.config.cjs */
 	[data-theme="studio"] {
-		--c-page: 20 30 18;
+		--c-page: 16 24 15;
 		--c-raised: 31 54 29;
 		--c-ink: 5 244 64;
 		--c-muted: 115 155 110;
@@ -131,8 +131,12 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...na
 		background: rgb(var(--c-page));
 	}
 
+	/* fixed terminal grid behind the whole studio page, so content scrolls over it */
 	[data-theme="studio"] body {
-		background: linear-gradient(to bottom, transparent, rgb(var(--c-raised))) rgb(var(--c-page));
+		background:
+			linear-gradient(rgb(var(--c-accent) / 0.05) 1px, transparent 1px) 0 0 / 48px 48px fixed,
+			linear-gradient(90deg, rgb(var(--c-accent) / 0.05) 1px, transparent 1px) 0 0 / 48px 48px fixed,
+			rgb(var(--c-page));
 	}
 
 	:focus-visible {

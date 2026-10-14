@@ -29,12 +29,13 @@ const games = [
 ];
 ---
 
-<section id="games" class="scroll-mt-24 px-4 py-24 sm:px-8">
+<section id="games" class="scroll-mt-24 px-4 py-12 sm:px-8 md:py-16">
   <div class="mx-auto max-w-6xl">
     <p class="font-mono text-sm text-secondary">~/mechanikoi/games</p>
     <h2 class="mt-2 text-4xl text-primary lg:text-6xl">{t("projects.title")}</h2>
+    <div class="mt-4 divide-y divide-detail">
     {games.map((game) => (
-      <article class="mt-12 grid items-center gap-8 border-t border-detail pt-12 md:grid-cols-2 md:gap-12">
+      <article class="grid items-center gap-8 py-10 md:grid-cols-2 md:gap-12">
         <a href={game.page} tabindex="-1" aria-hidden="true">
           <Image
             src={game.img}
@@ -68,5 +69,6 @@ const games = [
         </div>
       </article>
     ))}
+    </div>
   </div>
 </section>

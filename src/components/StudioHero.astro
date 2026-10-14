@@ -10,20 +10,19 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<!-- Same skeleton as the game heroes: art on the right, title block bottom-left over a darkening gradient -->
-<section class="grid-bg relative isolate flex min-h-[100svh] items-end overflow-hidden">
-  <!-- the two koi circle each other; anchored right like Iris on her page -->
+<!-- Same skeleton as the game heroes: art on the right, title block bottom-left -->
+<section class="relative isolate flex min-h-[100svh] items-end overflow-hidden">
+  <!-- the two koi stack into one circle and chase each other; the mask fades them out behind the title
+       instead of painting a gradient over the page grid -->
   <div
-    class="absolute left-1/2 top-32 -z-20 w-[min(92vw,60svh)] -translate-x-1/2 md:left-auto md:right-0 md:top-1/2 md:w-[min(46vw,84svh)] md:translate-x-0 md:-translate-y-1/2"
+    class="koi absolute left-1/2 top-24 -z-10 aspect-square w-[min(115vw,62svh)] -translate-x-1/2 md:left-auto md:-right-[4%] md:top-[54%] md:w-[min(56vw,82svh)] md:translate-x-0 md:-translate-y-1/2"
     aria-hidden="true"
   >
-    <div class="flex rotate-180 animate-spin">
-      <Image src={mechanikoiLeft} class="h-auto w-1/2 drop-shadow-sm" alt="" widths={[300, 600]} sizes="(min-width: 768px) 26vw, 46vw" loading="eager" />
-      <Image src={mechanikoiRight} class="h-auto w-1/2 drop-shadow-sm" alt="" widths={[300, 600]} sizes="(min-width: 768px) 26vw, 46vw" loading="eager" />
+    <div class="relative h-full w-full animate-spin [animation-direction:reverse]">
+      <Image src={mechanikoiLeft} class="absolute inset-0 h-full w-full drop-shadow-sm" alt="" widths={[600, 1000]} sizes="(min-width: 768px) 62vw, 115vw" loading="eager" />
+      <Image src={mechanikoiRight} class="absolute inset-0 h-full w-full drop-shadow-sm" alt="" widths={[600, 1000]} sizes="(min-width: 768px) 62vw, 115vw" loading="eager" />
     </div>
   </div>
-  <div class="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-gradient-to-t from-blackish via-blackish/80 to-transparent md:h-1/2 md:via-blackish/40"></div>
-  <div class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-blackish via-blackish/60 to-transparent md:block"></div>
 
   <div class="mx-auto w-full max-w-6xl px-4 pb-16 pt-40 sm:px-8 md:pb-24">
     <p class="font-mono text-secondary"><span class="text-primary">&gt;</span> {t("studio.hero.first")}</p>
@@ -49,12 +48,14 @@ const translatePath = useTranslatedPath(lang);
 </section>
 
 <style>
-  /* faint terminal grid in the slot where the game heroes have their key art */
-  .grid-bg {
-    background-image:
-      linear-gradient(rgb(5 244 64 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(5 244 64 / 0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
+  .koi {
+    mask-image: linear-gradient(to bottom, black 45%, transparent 85%);
+  }
+
+  @media (min-width: 768px) {
+    .koi {
+      mask-image: linear-gradient(to right, transparent 10%, black 55%);
+    }
   }
 
   .cursor {
