@@ -4,13 +4,16 @@ import { getLangFromUrl, useTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
+// path without its language prefix; blog routes always carry one
+const path = Astro.url.pathname.replace(new RegExp(`^/${lang}(?=/|$)`), "") || "/";
+const hrefFor = (l: string) => (path.startsWith("/blog") ? `/${l}${path}` : translatePath(path, l));
 ---
 <ul class="flex justify-center gap-2">
   {Object.entries(languages).map(([l, label]) => (
     <li>
       <a
-        class:list={["block min-w-[44px] px-2 py-3 text-center text-sm", l === lang ? "text-bone underline underline-offset-4" : "text-fog hover:text-bone"]}
-        href={translatePath('/', l)}
+        class:list={["block min-w-[44px] px-2 py-3 text-center text-sm", l === lang ? "text-ink underline underline-offset-4" : "text-muted hover:text-ink"]}
+        href={hrefFor(l)}
         hreflang={l}
         aria-current={l === lang ? "true" : undefined}
       >{label}</a>

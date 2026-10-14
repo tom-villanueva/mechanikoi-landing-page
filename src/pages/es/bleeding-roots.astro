@@ -1,0 +1,13 @@
+---
+import BleedingRootsHero from '../../components/BleedingRootsHero.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Layout title="Bleeding Roots | MechaniKOI" description={t("meta.br")} theme="br">
+	<main id="main">
+		<BleedingRootsHero />
+	</main>
+</Layout>

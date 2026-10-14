@@ -27,7 +27,7 @@ const href = (post: (typeof posts)[number]) => `/${lang}/blog/${post.slug.split(
 const formatDate = (d: Date) => d.toLocaleDateString(lang, { day: "numeric", month: "long", year: "numeric" });
 ---
 
-<Layout title="MechaniKOI | Blog">
+<Layout title="MechaniKOI | Blog" description={t("blog.subtitle")} theme="iris">
   <main id="main" class="px-4 pb-24 pt-32 sm:px-8 md:pt-40">
     <div class="mx-auto max-w-6xl">
       <h1 class="font-display text-5xl text-bone md:text-7xl">{t("blog.title")}</h1>

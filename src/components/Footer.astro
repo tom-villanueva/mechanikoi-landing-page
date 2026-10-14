@@ -2,39 +2,26 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { SHOW_BLOG } from "../config";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const prePath = lang !== "es" ? `${lang}/` : ""
+type NavItem = {
+  title: string,
+  url: string
+}
 
-const allFooterItems = [
-  {
-		title: t("footer.home"),
-		url: `/${prePath}`
-	},
-	{
-		title: t("footer.games"),
-		url: `/${prePath}#games`
-	},
-	{
-		title: t("footer.about"),
-		url: `/${prePath}#about`
-	},
-	{
-		title: t("footer.contact"),
-		url: `/${prePath}#contact`
-	},
-	{
-		title: "Blog",
-		url: `/${lang}/blog`
-	}
-]
+interface Props {
+  navItems: NavItem[]
+}
 
-const footerItems = allFooterItems.filter((item) => SHOW_BLOG || item.title !== "Blog")
+const { navItems: footerItems } = Astro.props;
 
 const socialItems = [
+  {
+    title: "Discord",
+    url: "https://discord.gg/sqzZJmKt7E"
+  },
   {
     title: "Twitter",
     url: "https://x.com/MechanikoiGames"
@@ -61,13 +48,14 @@ const socialItems = [
   },
 ]
 ---
-<footer class="w-full shrink-0 border-t border-fog/20 bg-night px-4 sm:px-8">
+<footer class="w-full shrink-0 border-t border-muted/20 bg-page px-4 sm:px-8">
   <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-10 py-12 md:flex-row">
     <div>
-      <p class="font-display text-3xl text-bone">
+      <p class="text-3xl text-ink">
         MechaniKOI
       </p>
-      <p class="mt-1 text-sm text-fog">{t("footer.title")}</p>
+      <p class="mt-1 text-sm text-muted">{t("footer.title")}</p>
+      <a class="mt-6 inline-block py-1.5 text-sm text-ink hover:underline" href="mailto:development@mechanikoi.com.ar">development@mechanikoi.com.ar</a>
     </div>
     <!-- <a href="/">
       <Image
@@ -82,8 +70,8 @@ const socialItems = [
   <div class="flex flex-row gap-x-16 sm:gap-x-24">
 
     <div>
-      <p class="pb-3 text-sm text-fog">{t("footer.menu")}</p>
-      <ul class="list-none text-bone">
+      <p class="pb-3 text-sm text-muted">{t("footer.menu")}</p>
+      <ul class="list-none text-ink">
         {
           footerItems.map(({ title, url }) => (
             <li class="text-sm hover:underline">
@@ -97,8 +85,8 @@ const socialItems = [
     </div>
 
     <div>
-      <p class="pb-3 text-sm text-fog">{t("footer.social")}</p>
-      <ul class="list-none text-bone">
+      <p class="pb-3 text-sm text-muted">{t("footer.social")}</p>
+      <ul class="list-none text-ink">
         {
           socialItems.map(({ title, url }) => (
             <li class="text-sm hover:underline">
@@ -113,10 +101,10 @@ const socialItems = [
   </div>
     
   </div>
-  <p class="pb-1 pt-2 text-center text-sm text-fog/70">
+  <p class="pb-1 pt-2 text-center text-sm text-muted/70">
     © {new Date().getFullYear()} MechaniKOI
   </p>
-  <p class="pb-6 pt-1 text-center text-xs text-fog/70">
+  <p class="pb-6 pt-1 text-center text-xs text-muted/70">
     {t("footer.dedicatory")}{" "}
     <a class="underline" href="https://www.linkedin.com/in/tomas-villanueva-jousset/" target="_blank" rel="noopener">Tom</a>
   </p>

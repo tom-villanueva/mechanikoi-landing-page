@@ -1,0 +1,15 @@
+---
+import IrisHero from '../components/IrisHero.astro';
+import IrisSection from '../components/IrisSection.astro';
+import Layout from '../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Layout title="Iris Dissolution | MechaniKOI" description={t("meta.iris")} theme="iris">
+	<main id="main">
+		<IrisHero />
+		<IrisSection />
+	</main>
+</Layout>

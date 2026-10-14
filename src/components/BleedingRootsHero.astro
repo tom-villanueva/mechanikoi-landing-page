@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+// ponytail: placeholder built from the Steam capsule; becomes hero + sections like Iris once BR assets arrive
+import br from "../assets/games/br.png";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="relative isolate flex min-h-[100svh] items-end overflow-hidden">
+  <Image
+    src={br}
+    alt=""
+    class="absolute inset-0 -z-20 h-full w-full object-cover object-[70%_50%]"
+    widths={[600, 1200]}
+    sizes="100vw"
+    loading="eager"
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-page via-page/80 to-page/10"></div>
+  <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-page to-transparent"></div>
+
+  <div class="mx-auto w-full max-w-6xl px-4 pb-16 pt-40 sm:px-8 md:pb-24">
+    <h1 class="text-5xl text-ink md:text-7xl">{t("games.br.title")}</h1>
+    <p class="mt-4 text-sm text-muted">{t("games.br.meta")}</p>
+    <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-ink/90 md:text-xl">{t("games.br.desc")}</p>
+    <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+      <a
+        href="https://store.steampowered.com/app/3091770"
+        target="_blank"
+        rel="noopener"
+        class="bg-accent px-6 py-4 text-lg font-bold text-ink transition-colors hover:bg-ink hover:text-page"
+      >
+        {t("games.br.steam")}
+      </a>
+      <a
+        href="https://mechanikoi.itch.io/bleedingroots"
+        target="_blank"
+        rel="noopener"
+        class="inline-block py-4 text-lg text-ink underline decoration-accent/60 underline-offset-8 hover:decoration-accent"
+      >
+        {t("games.br.itch")}
+      </a>
+    </div>
+  </div>
+</section>

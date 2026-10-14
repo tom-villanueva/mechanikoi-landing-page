@@ -21,6 +21,12 @@ module.exports = {
         bone: "#ECE6D6",
         ice: "#7FD3E6",
         blood: "#B8323A",
+        // Theme tokens for shared chrome (header, footer, picker); values set per html[data-theme] in Layout
+        page: "rgb(var(--c-page) / <alpha-value>)",
+        raised: "rgb(var(--c-raised) / <alpha-value>)",
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        muted: "rgb(var(--c-muted) / <alpha-value>)",
+        accent: "rgb(var(--c-accent) / <alpha-value>)",
       },
       animation: {
         spin: "spin 20s linear infinite",

@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from "../assets/logo.png";
 import LanguagePicker from './LanguagePicker.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
 
 type NavItem = {
   title: string,
@@ -17,12 +17,12 @@ interface Props {
 }
 
 const {navItems} = Astro.props;
-const homeUrl = lang !== "es" ? `/${lang}` : "/"
+const homeUrl = useTranslatedPath(lang)("/")
 ---
 
 <header 
   id="page-header"
-  class="absolute top-0 z-20 flex w-full items-center justify-between border-b border-transparent px-4 py-3 text-bone sm:px-8"
+  class="absolute top-0 z-20 flex w-full items-center justify-between border-b border-transparent px-4 py-3 text-ink sm:px-8"
 >
   <a class="flex items-center gap-3" href={homeUrl}>
     <span class="sr-only">MechaniKOI</span>
@@ -42,7 +42,7 @@ const homeUrl = lang !== "es" ? `/${lang}` : "/"
         {
           navItems.map(({ title, url }) => (
             <li>
-              <a class="text-base text-bone/80 hover:text-bone" href={url}>
+              <a class="text-base text-muted hover:text-ink" href={url}>
                 {title}
               </a>
             </li>
@@ -66,7 +66,7 @@ const homeUrl = lang !== "es" ? `/${lang}` : "/"
       </svg>
     </button>
      <div id="menu-modal" class="modal hidden" aria-hidden="true">
-      <div class="fixed inset-0 bg-night px-4 py-3 text-bone">
+      <div class="fixed inset-0 bg-page px-4 py-3 text-ink">
         <div class="space-y-4" role="dialog" aria-modal="true">
           <header class="text-right">
             <button
@@ -160,7 +160,7 @@ const homeUrl = lang !== "es" ? `/${lang}` : "/"
 <style>
   .fixed-header {
     @apply fixed bottom-auto top-0;
-    @apply border-fog/20 bg-night/90 backdrop-blur;
+    @apply border-muted/20 bg-page/90 backdrop-blur;
   }
   .modal.is-open {
     @apply block;

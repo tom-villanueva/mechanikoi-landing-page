@@ -2,18 +2,18 @@
 import AboutUsSection from '../../components/AboutUsSection.astro';
 import ContactSection from '../../components/ContactSection.astro';
 import GamesSection from '../../components/GamesSection.astro';
-import IrisSection from '../../components/IrisSection.astro';
-import HeroSection from '../../components/HeroSection.astro';
+import StudioHero from '../../components/StudioHero.astro';
 import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
-<Layout title="MechaniKOI | Iris Dissolution">
+<Layout title="MechaniKOI | Against the current!" description={t("meta.studio")}>
 	<main id="main">
-		<HeroSection />
-		<IrisSection />
-		<GamesSection />
+		<StudioHero />
 		<AboutUsSection />
+		<GamesSection />
 		<ContactSection />
 	</main>
 </Layout>
-

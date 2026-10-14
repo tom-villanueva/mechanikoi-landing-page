@@ -1,36 +1,37 @@
 ---
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getLangFromUrl, useTranslations, useTranslatedPath } from "../i18n/utils";
 import { SHOW_BLOG } from "../config";
 
 interface Props {
 	title: string;
+	description: string;
+	theme?: "studio" | "iris" | "br";
 }
 
-const { title } = Astro.props;
+const { title, description, theme = "studio" } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-const prePath = lang !== "es" ? `${lang}/` : ""
+const translatePath = useTranslatedPath(lang);
 
 const allNavItems = [
 	{
 		title: t("header.iris"),
-		url: `/${prePath}#iris`
+		url: translatePath("/iris-dissolution")
 	},
 	{
-		title: t("header.games"),
-		url: `/${prePath}#games`
+		title: t("header.br"),
+		url: translatePath("/bleeding-roots")
 	},
 	{
 		title: t("header.about"),
-		url: `/${prePath}#about`
+		url: translatePath("/#about")
 	},
 	{
 		title: t("header.contact"),
-		url: `/${prePath}#contact`
+		url: translatePath("/#contact")
 	},
 	{
 		title: "Blog",
@@ -39,20 +40,21 @@ const allNavItems = [
 ]
 
 const navItems = allNavItems.filter((item) => SHOW_BLOG || item.title !== "Blog")
+const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...navItems]
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-theme={theme}>
 	<head>
 		<meta charset="UTF-8" />
 		<!-- SEO -->
-		<meta name="description" content={t("meta.description")} />
-		<meta name="keywords" content="iris dissolution,survival horror,mechanikoi,indie,indie games,indie videogames,indie animation,videogames,games,games by mechanikoi">
+		<meta name="description" content={description} />
+		<meta name="keywords" content="mechanikoi,iris dissolution,bleeding roots,survival horror,indie,indie games,indie videogames,indie animation,videogames,games,games by mechanikoi">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="robots" content="index, follow" />
 		<meta property="og:title" content={title} />
-		<meta property="og:description" content={t("meta.description")} />
+		<meta property="og:description" content={description} />
 		<meta property="og:url" content="" />
 		<meta property="og:site_name" content="Mechanikoi Games" />
 		<meta name="twitter:site" content="@MechanikoiGames"/>
@@ -63,18 +65,22 @@ const navItems = allNavItems.filter((item) => SHOW_BLOG || item.title !== "Blog"
 			as="font"
 			crossorigin
 		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet" />
+		{theme === "iris" && (
+			<>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+				<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet" />
+			</>
+		)}
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<title>{title}</title>
 	</head>
 	<body>
-		<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-bone focus:px-4 focus:py-2 focus:text-night">{t("header.skip")}</a>
+		<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-page">{t("header.skip")}</a>
 		<div class="flex flex-col">
 			<Header navItems={navItems}/>
 			<slot />
-			<Footer />
+			<Footer navItems={footerItems} />
 		</div>
 	</body>
 </html>
@@ -92,17 +98,45 @@ const navItems = allNavItems.filter((item) => SHOW_BLOG || item.title !== "Blog"
 		color-scheme: dark;
 	}
 
+	/* RGB triplets for the theme tokens in tailwind.config.cjs */
+	[data-theme="studio"] {
+		--c-page: 20 30 18;
+		--c-raised: 31 54 29;
+		--c-ink: 5 244 64;
+		--c-muted: 115 155 110;
+		--c-accent: 5 244 64;
+	}
+	[data-theme="iris"] {
+		--c-page: 13 27 30;
+		--c-raised: 21 41 45;
+		--c-ink: 236 230 214;
+		--c-muted: 163 184 180;
+		--c-accent: 127 211 230;
+	}
+	/* ponytail: sampled from the Bleeding Roots capsule; swap once the real palette arrives */
+	[data-theme="br"] {
+		--c-page: 15 13 13;
+		--c-raised: 30 24 24;
+		--c-ink: 226 222 220;
+		--c-muted: 158 150 148;
+		--c-accent: 193 18 31;
+	}
+
 	html {
 		scroll-behavior: smooth;
 	}
 
 	body {
-		color: theme("colors.fog");
-		background: theme("colors.night");
+		color: rgb(var(--c-muted));
+		background: rgb(var(--c-page));
+	}
+
+	[data-theme="studio"] body {
+		background: linear-gradient(to bottom, transparent, rgb(var(--c-raised))) rgb(var(--c-page));
 	}
 
 	:focus-visible {
-		outline: 2px solid theme("colors.ice");
+		outline: 2px solid rgb(var(--c-accent));
 		outline-offset: 3px;
 	}
 

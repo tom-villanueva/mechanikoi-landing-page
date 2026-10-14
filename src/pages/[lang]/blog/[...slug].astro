@@ -22,7 +22,7 @@ const formattedDate = page.data.date.toLocaleDateString(lang, { day: "numeric", 
 const { Content } = await page.render();
 ---
 
-<Layout title={`MechaniKOI | ${page.data.title}`}>
+<Layout title={`MechaniKOI | ${page.data.title}`} description={page.data.description ?? page.data.title} theme="iris">
   <main id="main">
     <article class="px-4 pb-24 pt-32 sm:px-8 md:pt-40">
       <header class="mx-auto max-w-[45rem]">
