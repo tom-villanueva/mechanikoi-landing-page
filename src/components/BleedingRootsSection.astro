@@ -1,0 +1,112 @@
+---
+import { Image } from "astro:assets";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+import spring from "../assets/br/spring.webp";
+import summer from "../assets/br/summer.webp";
+import autumn from "../assets/br/autumn.webp";
+import winter from "../assets/br/winter.webp";
+import iconSpring from "../assets/br/icon-spring.png";
+import iconSummer from "../assets/br/icon-summer.png";
+import iconAutumn from "../assets/br/icon-autumn.png";
+import iconWinter from "../assets/br/icon-winter.png";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// color = the chalk color of each season's in-game card
+const seasons = [
+  { id: "spring", src: spring, icon: iconSpring, color: "#62d85a", name: t("br.spring.name"), desc: t("br.spring.desc"), alt: t("br.spring.alt") },
+  { id: "summer", src: summer, icon: iconSummer, color: "#e6c11c", name: t("br.summer.name"), desc: t("br.summer.desc"), alt: t("br.summer.alt") },
+  { id: "autumn", src: autumn, icon: iconAutumn, color: "#e08a1e", name: t("br.autumn.name"), desc: t("br.autumn.desc"), alt: t("br.autumn.alt") },
+  { id: "winter", src: winter, icon: iconWinter, color: "#3fc6d6", name: t("br.winter.name"), desc: t("br.winter.desc"), alt: t("br.winter.alt") },
+];
+---
+
+<section class="scroll-mt-24 px-4 py-24 sm:px-8 md:py-32">
+  <div class="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[2fr_3fr] lg:gap-20">
+    <div>
+      <h2 class="font-type text-3xl leading-tight text-ink md:text-4xl">{t("br.title")}</h2>
+      <p class="mt-8 max-w-prose text-lg leading-relaxed">{t("br.story1")}</p>
+      <p class="mt-4 max-w-prose text-lg leading-relaxed">{t("br.story2")}</p>
+      <p class="mt-4 max-w-prose text-lg leading-relaxed text-ink">{t("br.story3")}</p>
+      <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a
+          href="https://store.steampowered.com/app/3091770"
+          target="_blank"
+          rel="noopener"
+          class="bg-accent px-6 py-4 font-bold text-ink transition-colors hover:bg-ink hover:text-page"
+        >
+          {t("games.br.steam")}
+        </a>
+        <a
+          href="https://mechanikoi.itch.io/bleedingroots"
+          target="_blank"
+          rel="noopener"
+          class="inline-block py-2 text-ink underline decoration-accent/60 underline-offset-8 hover:decoration-accent"
+        >
+          {t("games.br.itch")}
+        </a>
+      </div>
+    </div>
+
+    <!-- Built from the game's own season cards -->
+    <div class="seasons self-start border border-accent/40 bg-raised p-3 sm:p-4">
+      <h3 class="sr-only">{t("br.seasons")}</h3>
+      <p class="mb-3 px-1 text-sm text-muted">{t("br.seasonsHint")}</p>
+      <div role="tablist" aria-label={t("br.seasons")} class="grid grid-cols-4 gap-2 sm:gap-3">
+        {seasons.map((s, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${s.id}`}
+            aria-controls={`panel-${s.id}`}
+            aria-selected={i === 0 ? "true" : "false"}
+            tabindex={i === 0 ? 0 : -1}
+            class="season"
+            style={`--season: ${s.color}`}
+          >
+            <Image src={s.icon} alt="" width={128} height={128} class="aspect-square h-auto w-full" loading="lazy" />
+            <span class="sr-only">{s.name}</span>
+          </button>
+        ))}
+      </div>
+      {seasons.map((s, i) => (
+        <div role="tabpanel" id={`panel-${s.id}`} aria-labelledby={`tab-${s.id}`} hidden={i !== 0} class="mt-4">
+          <Image
+            src={s.src}
+            alt={s.alt}
+            widths={[640, 960]}
+            sizes="(min-width: 1024px) 560px, 100vw"
+            class="aspect-video w-full object-cover"
+            loading="lazy"
+          />
+          <p class="mt-4 px-1 font-type text-2xl" style={`color: ${s.color}`}>{s.name}</p>
+          <p class="mt-1 px-1 pb-2 text-lg text-ink">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initTabs } from "../scripts/tabs";
+
+  document.querySelectorAll(".seasons").forEach(initTabs);
+</script>
+
+<style>
+  .season {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    opacity: 0.55;
+    transition: opacity 150ms, outline-color 150ms;
+  }
+  .season:hover {
+    opacity: 0.85;
+  }
+  .season[aria-selected="true"] {
+    opacity: 1;
+    outline-color: var(--season);
+  }
+</style>

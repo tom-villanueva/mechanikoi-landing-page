@@ -8,6 +8,7 @@ module.exports = {
       fontFamily: {
         sans: ["Play", ...defaultTheme.fontFamily.sans],
         display: ['"IM Fell English"', ...defaultTheme.fontFamily.serif],
+        type: ['"Special Elite"', ...defaultTheme.fontFamily.mono],
       },
       colors: {
         primary: "#05F440",

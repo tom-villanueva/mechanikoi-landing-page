@@ -73,6 +73,13 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...st
 				<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet" />
 			</>
 		)}
+		{theme === "br" && (
+			<>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+				<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+			</>
+		)}
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<title>{title}</title>
 	</head>
@@ -114,7 +121,7 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...st
 		--c-muted: 163 184 180;
 		--c-accent: 127 211 230;
 	}
-	/* ponytail: sampled from the Bleeding Roots capsule; swap once the real palette arrives */
+	/* sampled from the Bleeding Roots key art */
 	[data-theme="br"] {
 		--c-page: 15 13 13;
 		--c-raised: 30 24 24;

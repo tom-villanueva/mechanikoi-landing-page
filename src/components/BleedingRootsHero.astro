@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-// ponytail: placeholder built from the Steam capsule; becomes hero + sections like Iris once BR assets arrive
-import br from "../assets/games/br.png";
+import wall from "../assets/br/hero-wall.jpg";
+import logo from "../assets/br/br-logo.png";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,21 +11,31 @@ const t = useTranslations(lang);
 
 <section class="relative isolate flex min-h-[100svh] items-end overflow-hidden">
   <Image
-    src={br}
+    src={wall}
     alt=""
-    class="absolute inset-0 -z-20 h-full w-full object-cover object-[70%_50%]"
-    widths={[600, 1200]}
+    class="absolute inset-0 -z-30 h-full w-full object-cover"
+    widths={[960, 1920]}
     sizes="100vw"
     loading="eager"
   />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-page via-page/80 to-page/10"></div>
-  <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-page to-transparent"></div>
+  <!-- Character slot: the red plant/heart cutout goes here, placed like Iris on her page,
+       once the transparent file arrives from the artist -->
+  <div class="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-gradient-to-t from-page via-page/80 to-transparent md:h-1/2 md:via-page/40"></div>
+  <div class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-page/80 via-page/30 to-transparent md:block"></div>
 
   <div class="mx-auto w-full max-w-6xl px-4 pb-16 pt-40 sm:px-8 md:pb-24">
-    <h1 class="text-5xl text-ink md:text-7xl">{t("games.br.title")}</h1>
-    <p class="mt-4 text-sm text-muted">{t("games.br.meta")}</p>
-    <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-ink/90 md:text-xl">{t("games.br.desc")}</p>
-    <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+    <h1>
+      <Image
+        src={logo}
+        alt={t("games.br.title")}
+        widths={[400, 531]}
+        sizes="(min-width: 768px) 420px, 75vw"
+        class="h-auto w-[min(75vw,420px)]"
+        loading="eager"
+      />
+    </h1>
+    <p class="mt-8 max-w-[34ch] text-lg text-ink/90 md:text-xl">{t("br.tagline")}</p>
+    <div class="mt-10 flex flex-wrap items-center gap-4">
       <a
         href="https://store.steampowered.com/app/3091770"
         target="_blank"
@@ -43,5 +53,6 @@ const t = useTranslations(lang);
         {t("games.br.itch")}
       </a>
     </div>
+    <p class="mt-8 text-sm text-muted">{t("games.br.meta")}</p>
   </div>
 </section>
