@@ -16,15 +16,8 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-const allNavItems = [
-	{
-		title: t("header.iris"),
-		url: translatePath("/iris-dissolution")
-	},
-	{
-		title: t("header.br"),
-		url: translatePath("/bleeding-roots")
-	},
+// Header shows these as separate groups: studio links, then the games
+const studioItems = [
 	{
 		title: t("header.about"),
 		url: translatePath("/#about")
@@ -33,14 +26,22 @@ const allNavItems = [
 		title: t("header.contact"),
 		url: translatePath("/#contact")
 	},
+	...(SHOW_BLOG ? [{ title: "Blog", url: `/${lang}/blog` }] : [])
+]
+
+const gameItems = [
 	{
-		title: "Blog",
-		url: `/${lang}/blog`
+		title: t("header.iris"),
+		url: translatePath("/iris-dissolution")
+	},
+	{
+		title: t("header.br"),
+		url: translatePath("/bleeding-roots")
 	}
 ]
 
-const navItems = allNavItems.filter((item) => SHOW_BLOG || item.title !== "Blog")
-const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...navItems]
+const navGroups = [studioItems, gameItems]
+const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...studioItems, ...gameItems]
 ---
 
 <!doctype html>
@@ -78,7 +79,7 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...na
 	<body>
 		<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-page">{t("header.skip")}</a>
 		<div class="flex flex-col">
-			<Header navItems={navItems}/>
+			<Header navGroups={navGroups}/>
 			<slot />
 			<Footer navItems={footerItems} />
 		</div>

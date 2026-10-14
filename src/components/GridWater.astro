@@ -5,11 +5,11 @@
 <script>
   const CELL = 48; // matches the CSS grid size in Layout
   const STEP = 12; // px between points along each line
-  const WAVE = 3; // px of wave displacement
-  const DRIFT = 8; // px/s the grid scrolls up
-  const RIPPLE_EVERY = 5; // s between rings
-  const RIPPLE_SPEED = 140; // px/s ring growth
-  const RIPPLE_AMP = 10; // px push at the ring's crest
+  const WAVE = 1.5; // px of wave displacement
+  const DRIFT = 4; // px/s the grid scrolls up
+  const RIPPLE_EVERY = 7; // s between rings
+  const RIPPLE_SPEED = 80; // px/s ring growth
+  const RIPPLE_AMP = 4; // px push at the ring's crest
 
   const canvas = document.getElementById("grid-water") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d")!;
@@ -33,8 +33,8 @@
     const oy = r ? r.top + r.height / 2 : h / 2;
 
     const point = (x: number, y: number): [number, number] => {
-      let dx = WAVE * Math.sin(y * 0.02 + t * 0.8 + x * 0.004);
-      let dy = WAVE * Math.sin(x * 0.02 + t * 0.6 + y * 0.004);
+      let dx = WAVE * Math.sin(y * 0.02 + t * 0.4 + x * 0.004);
+      let dy = WAVE * Math.sin(x * 0.02 + t * 0.3 + y * 0.004);
       const rx = x - ox;
       const ry = y - oy;
       const d = Math.hypot(rx, ry) || 1;
