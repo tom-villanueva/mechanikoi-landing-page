@@ -1,6 +1,7 @@
 ---
 import BleedingRootsHero from '../../components/BleedingRootsHero.astro';
 import BleedingRootsSection from '../../components/BleedingRootsSection.astro';
+import BleedingRootsGallery from '../../components/BleedingRootsGallery.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
@@ -11,5 +12,6 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 	<main id="main">
 		<BleedingRootsHero />
 		<BleedingRootsSection />
+		<BleedingRootsGallery />
 	</main>
 </Layout>

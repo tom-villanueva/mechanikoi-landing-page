@@ -1,0 +1,70 @@
+---
+import { Image, getImage } from "astro:assets";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+import shot1 from "../assets/br/shots/1.webp";
+import shot2 from "../assets/br/shots/2.webp";
+import shot3 from "../assets/br/shots/3.webp";
+import shot4 from "../assets/br/shots/4.webp";
+import shot5 from "../assets/br/shots/5.webp";
+import shot6 from "../assets/br/shots/6.webp";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const shots = await Promise.all(
+  [
+    { src: shot1, alt: t("br.shot1") },
+    { src: shot2, alt: t("br.shot2") },
+    { src: shot3, alt: t("br.shot3") },
+    { src: shot4, alt: t("br.shot4") },
+    { src: shot5, alt: t("br.shot5") },
+    { src: shot6, alt: t("br.shot6") },
+  ].map(async (s) => ({ ...s, full: (await getImage({ src: s.src, width: 1600 })).src })),
+);
+---
+
+<section class="border-t border-muted/20 px-4 py-24 sm:px-8">
+  <div class="mx-auto max-w-6xl">
+    <h2 class="font-type text-3xl text-ink md:text-4xl">{t("br.gallery")}</h2>
+    <p class="mt-2 text-sm text-muted">{t("br.galleryHint")}</p>
+    <ul class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+      {shots.map((s) => (
+        <li>
+          <button type="button" class="shot block w-full" data-full={s.full} data-alt={s.alt}>
+            <Image
+              src={s.src}
+              alt={s.alt}
+              widths={[400, 640]}
+              sizes="(min-width: 768px) 360px, 50vw"
+              class="aspect-video w-full border border-muted/20 object-cover transition-colors hover:border-accent"
+              loading="lazy"
+            />
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- native <dialog> lightbox: Esc and backdrop click close it -->
+  <dialog id="shot-viewer" class="max-h-[90vh] max-w-[min(92vw,1600px)] bg-transparent p-0 backdrop:bg-black/85">
+    <form method="dialog">
+      <button class="absolute right-2 top-2 bg-page/80 px-3 py-2 text-sm text-ink">{t("br.close")}</button>
+    </form>
+    <img alt="" class="max-h-[90vh] w-auto" />
+  </dialog>
+</section>
+
+<script>
+  const viewer = document.getElementById("shot-viewer") as HTMLDialogElement;
+  const img = viewer.querySelector("img")!;
+
+  document.querySelectorAll<HTMLButtonElement>(".shot").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      img.src = btn.dataset.full!;
+      img.alt = btn.dataset.alt!;
+      viewer.showModal();
+    }),
+  );
+  viewer.addEventListener("click", (e) => e.target === viewer && viewer.close());
+</script>
