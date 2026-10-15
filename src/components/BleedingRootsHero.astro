@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 import wall from "../assets/br/hero-wall.jpg";
 import logo from "../assets/br/br-logo.png";
-import plant from "../assets/br/plant.png";
+import plant from "../assets/br/plant.webp";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -24,8 +24,8 @@ const t = useTranslations(lang);
     src={plant}
     alt=""
     class="hero-plant absolute -right-[18%] top-16 -z-20 h-[55svh] w-auto sm:-right-[4%] md:bottom-0 md:right-0 md:top-auto md:h-[92%]"
-    widths={[480, 840]}
-    sizes="(min-width: 768px) 560px, 60vw"
+    widths={[600, 1000, 1400]}
+    sizes="(min-width: 768px) 720px, 60vw"
     loading="eager"
     fetchpriority="high"
   />

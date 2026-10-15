@@ -12,7 +12,7 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 <Layout title="Iris Dissolution | MechaniKOI" description={t("meta.iris")} theme="iris">
 	<main id="main">
 		<IrisHero />
-		<Trailer id="sISqIWI1bNY" title={t("iris.trailer")} frame="border-2 border-ice/70" />
+		<Trailer id="sISqIWI1bNY" title={t("iris.trailer")} frame="border-2 border-ice/70" caption={t("iris.trailerMusic")} />
 		<IrisSection />
 		<Lightbox />
 	</main>

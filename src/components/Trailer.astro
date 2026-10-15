@@ -4,9 +4,10 @@ interface Props {
   id: string;
   title: string;
   frame: string; // border classes in the page's palette
+  caption?: string;
 }
 
-const { id, title, frame } = Astro.props;
+const { id, title, frame, caption } = Astro.props;
 ---
 
 <section class="px-4 pt-24 sm:px-8 md:pt-32">
@@ -21,4 +22,5 @@ const { id, title, frame } = Astro.props;
       allowfullscreen
     ></iframe>
   </div>
+  {caption && <p class="mx-auto mt-3 max-w-5xl text-sm text-muted">{caption}</p>}
 </section>
