@@ -4,6 +4,8 @@ import BleedingRootsSection from '../components/BleedingRootsSection.astro';
 import BleedingRootsGallery from '../components/BleedingRootsGallery.astro';
 import Trailer from '../components/Trailer.astro';
 import Lightbox from '../components/Lightbox.astro';
+import Recognitions from '../components/Recognitions.astro';
+import { brRecognitions } from '../data/recognitions';
 import Layout from '../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
@@ -15,6 +17,7 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 		<BleedingRootsHero />
 		<Trailer id="KmD74BodvyM" title={t("br.trailer")} frame="border border-accent/40" />
 		<BleedingRootsSection />
+		<Recognitions items={brRecognitions} headingFont="font-type" />
 		<BleedingRootsGallery />
 		<Lightbox />
 	</main>

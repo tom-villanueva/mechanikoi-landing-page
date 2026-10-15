@@ -1,0 +1,43 @@
+---
+// Logo • text rows. Logos share one height (optical `scale` aside) and sit in a
+// fixed-width column sized to the widest logo, so every text starts on the same line.
+import type { Recognition } from "../data/recognitions";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+interface Props {
+  items: Recognition[];
+  headingFont: string; // the page's display font class
+}
+
+const { items, headingFont } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const LOGO_H = 38; // px
+const col = Math.ceil(Math.max(...items.map((i) => (i.logo.width / i.logo.height) * LOGO_H * (i.scale ?? 1))));
+---
+
+<section id="recognition" class="scroll-mt-8 border-t border-muted/20 px-4 py-24 sm:px-8">
+  <div class="mx-auto max-w-6xl">
+    <h2 class={`${headingFont} text-3xl leading-tight text-ink md:text-4xl`}>{t("rec.title")}</h2>
+    <ul class="mt-8 space-y-5" style={`--logo-h: ${LOGO_H}px; --logo-col: ${col}px`}>
+      {items.map((item) => (
+        <li class="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span class="flex w-[--logo-col] shrink-0 items-center">
+            <img
+              src={item.logo.src}
+              alt={item.alt}
+              width={item.logo.width}
+              height={item.logo.height}
+              class="h-[calc(var(--logo-h)*var(--s))] w-auto"
+              style={`--s: ${item.scale ?? 1}`}
+              loading="lazy"
+            />
+          </span>
+          <span class="min-w-[15rem] flex-1 text-lg text-ink">
+            <span class="mr-2 text-muted" aria-hidden="true">•</span>{t(item.text)}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

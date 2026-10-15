@@ -3,6 +3,8 @@ import IrisHero from '../../components/IrisHero.astro';
 import IrisSection from '../../components/IrisSection.astro';
 import Trailer from '../../components/Trailer.astro';
 import Lightbox from '../../components/Lightbox.astro';
+import Recognitions from '../../components/Recognitions.astro';
+import { irisRecognitions } from '../../data/recognitions';
 import Layout from '../../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
@@ -14,6 +16,7 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 		<IrisHero />
 		<Trailer id="sISqIWI1bNY" title={t("iris.trailer")} frame="border-2 border-ice/70" caption={t("iris.trailerMusic")} />
 		<IrisSection />
+		<Recognitions items={irisRecognitions} headingFont="font-display" />
 		<Lightbox />
 	</main>
 </Layout>
