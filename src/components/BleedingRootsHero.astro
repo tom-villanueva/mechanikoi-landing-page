@@ -23,8 +23,8 @@ const t = useTranslations(lang);
   <Image
     src={plant}
     alt=""
-    class="hero-plant absolute -right-[18%] top-16 -z-20 h-[55svh] w-auto sm:-right-[4%] md:bottom-0 md:right-[4%] md:top-auto md:h-[92%]"
-    widths={[480, 853]}
+    class="hero-plant absolute -right-[18%] top-16 -z-20 h-[55svh] w-auto sm:-right-[4%] md:bottom-0 md:right-0 md:top-auto md:h-[92%]"
+    widths={[480, 840]}
     sizes="(min-width: 768px) 560px, 60vw"
     loading="eager"
     fetchpriority="high"
@@ -32,21 +32,22 @@ const t = useTranslations(lang);
   <div class="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-gradient-to-t from-page via-page/60 to-transparent md:h-2/5 md:via-page/20"></div>
   <div class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-page/60 via-page/10 to-transparent md:block"></div>
 
-  <div class="mx-auto w-full max-w-6xl px-4 pb-16 pt-28 sm:px-8 md:pb-20">
+  <div class="mx-auto w-full max-w-6xl px-4 pb-16 pt-24 sm:px-8 md:pb-20">
     <h1>
-      <!-- the press-kit logo with its heartbeat pulse; still version for reduced motion -->
-      <picture>
+      <!-- the press-kit logo with its heartbeat pulse; still version for reduced motion.
+           The wrapper trims the file's empty margin (content is 541x502 of 600x600). -->
+      <picture class="block aspect-[541/502] w-[min(85vw,540px,62svh)] overflow-hidden">
         <source srcset={logo.src} media="(prefers-reduced-motion: reduce)" />
         <img
           src="/br/logo-animated.gif"
           alt={t("games.br.title")}
           width={logo.width}
           height={logo.height}
-          class="-ml-[6%] h-auto w-[min(80vw,380px)]"
+          class="-ml-[5.5%] -mt-[6.3%] h-auto w-[110.9%] max-w-none"
         />
       </picture>
     </h1>
-    <p class="mt-8 max-w-[34ch] text-lg text-ink/90 md:text-xl">{t("br.tagline")}</p>
+    <p class="mt-6 max-w-[34ch] text-lg text-ink/90 md:text-xl">{t("br.tagline")}</p>
     <div class="mt-10 flex flex-wrap items-center gap-4">
       <a
         href="https://store.steampowered.com/app/3091770"

@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { SHOW_BLOG } from "../config";
 
@@ -11,12 +11,12 @@ import shotInventory from "../assets/iris/inventory.png";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const items = [
+const items = await Promise.all([
   { id: "f1", src: shotCamera, name: t("iris.f1.name"), desc: t("iris.f1.desc"), alt: t("iris.f1.alt") },
   { id: "f2", src: shotAmmo, name: t("iris.f2.name"), desc: t("iris.f2.desc"), alt: t("iris.f2.alt") },
   { id: "f3", src: shotPuzzle, name: t("iris.f3.name"), desc: t("iris.f3.desc"), alt: t("iris.f3.alt") },
   { id: "f4", src: shotInventory, name: t("iris.f4.name"), desc: t("iris.f4.desc"), alt: t("iris.f4.alt") },
-];
+].map(async (item) => ({ ...item, full: (await getImage({ src: item.src, width: 1600 })).src })));
 ---
 
 <section id="iris" class="scroll-mt-24 px-4 py-24 sm:px-8 md:py-32">
@@ -89,14 +89,16 @@ const items = [
             hidden={i !== 0}
             class="space-y-4"
           >
-            <Image
-              src={item.src}
-              alt={item.alt}
-              widths={[640, 960]}
-              sizes="(min-width: 1024px) 420px, 100vw"
-              class="aspect-video w-full rounded-sm border-2 border-ice/60 object-cover"
-              loading="lazy"
-            />
+            <button type="button" class="block w-full cursor-zoom-in" data-full={item.full} data-alt={item.alt}>
+              <Image
+                src={item.src}
+                alt={item.alt}
+                widths={[640, 960]}
+                sizes="(min-width: 1024px) 420px, 100vw"
+                class="aspect-video w-full rounded-sm border-2 border-ice/60 object-cover transition-colors hover:border-ice"
+                loading="lazy"
+              />
+            </button>
             <p class="px-1 pb-2 text-lg leading-snug text-bone">{item.desc}</p>
           </div>
         ))}

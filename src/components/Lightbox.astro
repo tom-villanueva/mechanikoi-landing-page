@@ -1,0 +1,28 @@
+---
+// One native <dialog> per page: any button with data-full/data-alt opens its image here.
+// Esc and backdrop click close it. Colors come from the page theme tokens.
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<dialog id="lightbox" class="max-h-[90vh] max-w-[min(92vw,1600px)] bg-transparent p-0 backdrop:bg-black/85">
+  <form method="dialog">
+    <button class="absolute right-2 top-2 bg-page/80 px-3 py-2 text-sm text-ink">{t("lightbox.close")}</button>
+  </form>
+  <img alt="" class="max-h-[90vh] w-auto" />
+</dialog>
+
+<script>
+  const viewer = document.getElementById("lightbox") as HTMLDialogElement;
+  const img = viewer.querySelector("img")!;
+
+  document.querySelectorAll<HTMLButtonElement>("button[data-full]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      img.src = btn.dataset.full!;
+      img.alt = btn.dataset.alt!;
+      viewer.showModal();
+    }),
+  );
+  viewer.addEventListener("click", (e) => e.target === viewer && viewer.close());
+</script>

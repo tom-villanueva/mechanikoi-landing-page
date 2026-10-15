@@ -1,6 +1,8 @@
 ---
 import IrisHero from '../components/IrisHero.astro';
 import IrisSection from '../components/IrisSection.astro';
+import Trailer from '../components/Trailer.astro';
+import Lightbox from '../components/Lightbox.astro';
 import Layout from '../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
@@ -10,6 +12,8 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 <Layout title="Iris Dissolution | MechaniKOI" description={t("meta.iris")} theme="iris">
 	<main id="main">
 		<IrisHero />
+		<Trailer id="sISqIWI1bNY" title={t("iris.trailer")} frame="border-2 border-ice/70" />
 		<IrisSection />
+		<Lightbox />
 	</main>
 </Layout>

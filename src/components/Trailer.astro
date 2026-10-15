@@ -1,0 +1,24 @@
+---
+// YouTube trailer, privacy-enhanced domain, loads only when scrolled near.
+interface Props {
+  id: string;
+  title: string;
+  frame: string; // border classes in the page's palette
+}
+
+const { id, title, frame } = Astro.props;
+---
+
+<section class="px-4 pt-24 sm:px-8 md:pt-32">
+  <div class={`mx-auto max-w-5xl ${frame}`}>
+    <iframe
+      src={`https://www.youtube-nocookie.com/embed/${id}?rel=0`}
+      title={title}
+      class="aspect-video w-full"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>

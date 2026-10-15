@@ -31,7 +31,7 @@ const shots = await Promise.all(
     <ul class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
       {shots.map((s) => (
         <li>
-          <button type="button" class="shot block w-full" data-full={s.full} data-alt={s.alt}>
+          <button type="button" class="block w-full cursor-zoom-in" data-full={s.full} data-alt={s.alt}>
             <Image
               src={s.src}
               alt={s.alt}
@@ -45,26 +45,4 @@ const shots = await Promise.all(
       ))}
     </ul>
   </div>
-
-  <!-- native <dialog> lightbox: Esc and backdrop click close it -->
-  <dialog id="shot-viewer" class="max-h-[90vh] max-w-[min(92vw,1600px)] bg-transparent p-0 backdrop:bg-black/85">
-    <form method="dialog">
-      <button class="absolute right-2 top-2 bg-page/80 px-3 py-2 text-sm text-ink">{t("br.close")}</button>
-    </form>
-    <img alt="" class="max-h-[90vh] w-auto" />
-  </dialog>
 </section>
-
-<script>
-  const viewer = document.getElementById("shot-viewer") as HTMLDialogElement;
-  const img = viewer.querySelector("img")!;
-
-  document.querySelectorAll<HTMLButtonElement>(".shot").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      img.src = btn.dataset.full!;
-      img.alt = btn.dataset.alt!;
-      viewer.showModal();
-    }),
-  );
-  viewer.addEventListener("click", (e) => e.target === viewer && viewer.close());
-</script>
