@@ -6,8 +6,5 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
   site: "https://mechanikoi.com.ar",
-  // English moved to the root; keep old links alive
-  redirects: {
-    "/en": "/",
-  },
+  // Old /en links are 301'd to the root in public/.htaccess
 });

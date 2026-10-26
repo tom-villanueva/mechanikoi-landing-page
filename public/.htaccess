@@ -1,0 +1,3 @@
+# English moved to the root: real 301s instead of Astro's noindex meta-refresh page
+RedirectMatch 301 ^/en/?$ /
+RedirectMatch 301 ^/en/(iris-dissolution|bleeding-roots)/?$ /$1/
