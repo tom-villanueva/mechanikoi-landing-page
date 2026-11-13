@@ -3,6 +3,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "../i18n/utils";
 import { SHOW_BLOG } from "../config";
+import { languages, defaultLang } from "../i18n/ui";
 
 interface Props {
 	title: string;
@@ -15,6 +16,14 @@ const { title, description, theme = "studio" } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
+
+// Canonical + hreflang so Google doesn't treat http/www/index.html variants as duplicates.
+// Apache serves every page as a directory, so the trailing slash is the real URL.
+const path = Astro.url.pathname.replace(/\/?$/, "/");
+const canonical = new URL(path, Astro.site).href;
+const isBlog = /^\/(en|es)\/blog\//.test(path);
+const altUrl = (l: keyof typeof languages) =>
+	new URL(isBlog ? path.replace(/^\/(en|es)\//, `/${l}/`) : translatePath(path.replace(/^\/es(?=\/)/, ""), l), Astro.site).href;
 
 // Header shows these as separate groups: studio links, then the games
 const studioItems = [
@@ -56,7 +65,12 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...st
 		<meta name="robots" content="index, follow" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:url" content="" />
+		<link rel="canonical" href={canonical} />
+		{Object.keys(languages).map((l) => (
+			<link rel="alternate" hreflang={l} href={altUrl(l as keyof typeof languages)} />
+		))}
+		<link rel="alternate" hreflang="x-default" href={altUrl(defaultLang)} />
+		<meta property="og:url" content={canonical} />
 		<meta property="og:site_name" content="Mechanikoi Games" />
 		<meta name="twitter:site" content="@MechanikoiGames"/>
 		
