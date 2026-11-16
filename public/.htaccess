@@ -1,3 +1,21 @@
+RewriteEngine On
+
+# One URL per page: https, no www, no index.html. Without these every variant answers 200
+# and Search Console reports it as a duplicate ("Alternate page with proper canonical tag").
+# /.well-known/ stays reachable over http for SSL certificate renewal.
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteRule ^ https://mechanikoi.com.ar%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://mechanikoi.com.ar%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?]
+RewriteRule ^ /%1 [R=301,L]
+
 # English moved to the root: real 301s instead of Astro's noindex meta-refresh page
 RedirectMatch 301 ^/en/?$ /
 RedirectMatch 301 ^/en/(iris-dissolution|bleeding-roots)/?$ /$1/
+
+ErrorDocument 404 /404.html

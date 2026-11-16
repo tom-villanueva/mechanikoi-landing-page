@@ -4,13 +4,14 @@ import ContactSection from '../../components/ContactSection.astro';
 import GamesSection from '../../components/GamesSection.astro';
 import GridWater from '../../components/GridWater.astro';
 import StudioHero from '../../components/StudioHero.astro';
+import { studioLd } from '../../data/structuredData';
 import Layout from '../../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
-<Layout title="MechaniKOI | Against the current!" description={t("meta.studio")}>
+<Layout title={t("title.studio")} description={t("meta.studio")} jsonLd={studioLd}>
 	<GridWater />
 	<main id="main">
 		<StudioHero />

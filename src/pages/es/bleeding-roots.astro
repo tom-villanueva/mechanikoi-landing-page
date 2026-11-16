@@ -6,17 +6,21 @@ import Trailer from '../../components/Trailer.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import Recognitions from '../../components/Recognitions.astro';
 import { brRecognitions } from '../../data/recognitions';
+import GameFacts from '../../components/GameFacts.astro';
+import { brLd } from '../../data/structuredData';
+import shareImage from '../../assets/games/br.webp';
 import Layout from '../../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
-<Layout title="Bleeding Roots | MechaniKOI" description={t("meta.br")} theme="br">
+<Layout title={t("title.br")} description={t("meta.br")} theme="br" image={shareImage} jsonLd={brLd}>
 	<main id="main">
 		<BleedingRootsHero />
 		<Trailer id="KmD74BodvyM" title={t("br.trailer")} frame="border border-accent/40" />
 		<BleedingRootsSection />
+		<GameFacts items={[["facts.genre", "facts.br.genre"], ["facts.length", "facts.br.length"], ["facts.price", "facts.br.price"], ["facts.platform", "facts.br.platform"], ["facts.developer", "facts.studio"]]} />
 		<Recognitions items={brRecognitions} headingFont="font-type" />
 		<BleedingRootsGallery />
 		<Lightbox />

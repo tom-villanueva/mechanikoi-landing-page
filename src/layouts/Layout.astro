@@ -4,14 +4,19 @@ import Header from '../components/Header.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "../i18n/utils";
 import { SHOW_BLOG } from "../config";
 import { languages, defaultLang } from "../i18n/ui";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import ogStudio from "../assets/og-studio.png";
 
 interface Props {
 	title: string;
 	description: string;
 	theme?: "studio" | "iris" | "br";
+	image?: ImageMetadata; // share image for link previews; defaults to the studio card
+	jsonLd?: Record<string, unknown>; // schema.org data, see src/data/structuredData.ts
 }
 
-const { title, description, theme = "studio" } = Astro.props;
+const { title, description, theme = "studio", image = ogStudio, jsonLd } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -21,6 +26,9 @@ const translatePath = useTranslatedPath(lang);
 // Apache serves every page as a directory, so the trailing slash is the real URL.
 const path = Astro.url.pathname.replace(/\/?$/, "/");
 const canonical = new URL(path, Astro.site).href;
+// Link previews (Discord, X, WhatsApp...): JPG because some of them skip WebP
+const og = await getImage({ src: image, width: 1200, format: "jpg" });
+const ogUrl = new URL(og.src, Astro.site).href;
 const isBlog = /^\/(en|es)\/blog\//.test(path);
 const altUrl = (l: keyof typeof languages) =>
 	new URL(isBlog ? path.replace(/^\/(en|es)\//, `/${l}/`) : translatePath(path.replace(/^\/es(?=\/)/, ""), l), Astro.site).href;
@@ -35,17 +43,17 @@ const studioItems = [
 		title: t("header.contact"),
 		url: translatePath("/#contact")
 	},
-	...(SHOW_BLOG ? [{ title: "Blog", url: `/${lang}/blog` }] : [])
+	...(SHOW_BLOG ? [{ title: "Blog", url: `/${lang}/blog/` }] : [])
 ]
 
 const gameItems = [
 	{
 		title: t("header.iris"),
-		url: translatePath("/iris-dissolution")
+		url: translatePath("/iris-dissolution/")
 	},
 	{
 		title: t("header.br"),
-		url: translatePath("/bleeding-roots")
+		url: translatePath("/bleeding-roots/")
 	}
 ]
 
@@ -62,7 +70,8 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...st
 		<meta name="keywords" content="mechanikoi,iris dissolution,bleeding roots,survival horror,indie,indie games,indie videogames,indie animation,videogames,games,games by mechanikoi">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="robots" content="index, follow" />
+		{/* blog pages are still built while hidden; keep them out of Google until SHOW_BLOG is on */}
+		<meta name="robots" content={(isBlog && !SHOW_BLOG) || path === "/404/" ? "noindex, follow" : "index, follow"} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<link rel="canonical" href={canonical} />
@@ -71,12 +80,19 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...st
 		))}
 		<link rel="alternate" hreflang="x-default" href={altUrl(defaultLang)} />
 		<meta property="og:url" content={canonical} />
-		<meta property="og:site_name" content="Mechanikoi Games" />
+		<meta property="og:site_name" content="MechaniKOI" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content={ogUrl} />
+		<meta property="og:image:width" content={og.attributes.width} />
+		<meta property="og:image:height" content={og.attributes.height} />
+		<meta name="twitter:card" content="summary_large_image" />
+		{jsonLd && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", url: canonical, description, image: ogUrl, ...jsonLd })} />}
 		<meta name="twitter:site" content="@MechanikoiGames"/>
 		
 		<link
 			rel="preload"
-			href="/fonts/Play-Regular.ttf"
+			href="/fonts/Play-Regular.woff2"
+			type="font/woff2"
 			as="font"
 			crossorigin
 		/>
@@ -110,7 +126,7 @@ const footerItems = [{ title: t("footer.home"), url: translatePath("/") }, ...st
 <style is:global>
 	@font-face {
 		font-family: 'Play';
-		src: url('/fonts/Play-Regular.ttf') format('truetype');
+		src: url('/fonts/Play-Regular.woff2') format('woff2');
 		font-weight: normal;
 		font-style: normal;
 		font-display: swap;

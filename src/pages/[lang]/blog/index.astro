@@ -23,7 +23,7 @@ for (const post of older) {
   byYear.set(year, [...(byYear.get(year) ?? []), post]);
 }
 
-const href = (post: (typeof posts)[number]) => `/${lang}/blog/${post.slug.split("/")[1]}`;
+const href = (post: (typeof posts)[number]) => `/${lang}/blog/${post.slug.split("/")[1]}/`;
 const formatDate = (d: Date) => d.toLocaleDateString(lang, { day: "numeric", month: "long", year: "numeric" });
 ---
 

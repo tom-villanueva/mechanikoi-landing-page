@@ -1,0 +1,25 @@
+---
+// Small spec list, like the panel on the back of a game case. Plain label/value pairs so search
+// engines and AI assistants can quote them. Keep to facts that don't change (see src/i18n/ui.ts "facts.*").
+import type { ui, defaultLang } from "../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+type Key = keyof (typeof ui)[typeof defaultLang];
+
+interface Props {
+  items: [label: Key, value: Key][];
+}
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<section class="px-4 pb-24 sm:px-8">
+  <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-6 border-t border-muted/20 pt-8 sm:grid-cols-3 lg:grid-cols-5">
+    {Astro.props.items.map(([label, value]) => (
+      <div>
+        <dt class="text-xs uppercase tracking-widest text-muted">{t(label)}</dt>
+        <dd class="mt-1 text-ink">{t(value)}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

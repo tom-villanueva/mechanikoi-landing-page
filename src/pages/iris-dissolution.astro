@@ -5,17 +5,21 @@ import Trailer from '../components/Trailer.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Recognitions from '../components/Recognitions.astro';
 import { irisRecognitions } from '../data/recognitions';
+import GameFacts from '../components/GameFacts.astro';
+import { irisLd } from '../data/structuredData';
+import shareImage from '../assets/games/iris.webp';
 import Layout from '../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
-<Layout title="Iris Dissolution | MechaniKOI" description={t("meta.iris")} theme="iris">
+<Layout title={t("title.iris")} description={t("meta.iris")} theme="iris" image={shareImage} jsonLd={irisLd}>
 	<main id="main">
 		<IrisHero />
 		<Trailer id="sISqIWI1bNY" title={t("iris.trailer")} frame="border-2 border-ice/70" caption={t("iris.trailerMusic")} />
 		<IrisSection />
+		<GameFacts items={[["facts.genre", "facts.iris.genre"], ["facts.camera", "facts.iris.camera"], ["facts.players", "facts.single"], ["facts.platform", "facts.iris.platform"], ["facts.developer", "facts.studio"]]} />
 		<Recognitions items={irisRecognitions} headingFont="font-display" />
 		<Lightbox />
 	</main>
